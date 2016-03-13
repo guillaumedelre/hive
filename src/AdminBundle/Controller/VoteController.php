@@ -5,16 +5,16 @@ namespace AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class DefaultController extends Controller
+class VoteController extends Controller
 {
     /**
-     * @Route("/", name="admin_default_index")
+     * @Route("/votes", name="admin_vote_index")
      */
     public function indexAction()
     {
         $data = array(
-            'pageTitle' => 'Tableau de bord',
+            'pageTitle' => 'Sondages',
         );
-        return $this->render('AdminBundle:Default:index.html.twig', $data);
+        return $this->render('AdminBundle:Vote:index.html.twig', $data);
     }
 }

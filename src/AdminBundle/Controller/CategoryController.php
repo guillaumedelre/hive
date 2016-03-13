@@ -5,16 +5,16 @@ namespace AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class DefaultController extends Controller
+class CategoryController extends Controller
 {
     /**
-     * @Route("/", name="admin_default_index")
+     * @Route("/categories", name="admin_category_index")
      */
     public function indexAction()
     {
         $data = array(
-            'pageTitle' => 'Tableau de bord',
+            'pageTitle' => 'Catégories',
         );
-        return $this->render('AdminBundle:Default:index.html.twig', $data);
+        return $this->render('AdminBundle:Category:index.html.twig', $data);
     }
 }

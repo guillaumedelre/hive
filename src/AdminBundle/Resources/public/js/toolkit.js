@@ -1,8 +1,8 @@
 /* ========================================================================
- * Bootstrap: transition.js v3.3.5
+ * Bootstrap: transition.js v3.3.6
  * http://getbootstrap.com/javascript/#transitions
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -59,10 +59,105 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: affix.js v3.3.5
+ * Bootstrap: alert.js v3.3.6
+ * http://getbootstrap.com/javascript/#alerts
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // ALERT CLASS DEFINITION
+  // ======================
+
+  var dismiss = '[data-dismiss="alert"]'
+  var Alert   = function (el) {
+    $(el).on('click', dismiss, this.close)
+  }
+
+  Alert.VERSION = '3.3.6'
+
+  Alert.TRANSITION_DURATION = 150
+
+  Alert.prototype.close = function (e) {
+    var $this    = $(this)
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = $(selector)
+
+    if (e) e.preventDefault()
+
+    if (!$parent.length) {
+      $parent = $this.closest('.alert')
+    }
+
+    $parent.trigger(e = $.Event('close.bs.alert'))
+
+    if (e.isDefaultPrevented()) return
+
+    $parent.removeClass('in')
+
+    function removeElement() {
+      // detach from parent, fire event then clean up data
+      $parent.detach().trigger('closed.bs.alert').remove()
+    }
+
+    $.support.transition && $parent.hasClass('fade') ?
+      $parent
+        .one('bsTransitionEnd', removeElement)
+        .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
+      removeElement()
+  }
+
+
+  // ALERT PLUGIN DEFINITION
+  // =======================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.alert')
+
+      if (!data) $this.data('bs.alert', (data = new Alert(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.alert
+
+  $.fn.alert             = Plugin
+  $.fn.alert.Constructor = Alert
+
+
+  // ALERT NO CONFLICT
+  // =================
+
+  $.fn.alert.noConflict = function () {
+    $.fn.alert = old
+    return this
+  }
+
+
+  // ALERT DATA-API
+  // ==============
+
+  $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
+
+}(jQuery);
+
+/* ========================================================================
+ * Bootstrap: affix.js v3.3.6
  * http://getbootstrap.com/javascript/#affix
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -88,7 +183,7 @@
     this.checkPosition()
   }
 
-  Affix.VERSION  = '3.3.5'
+  Affix.VERSION  = '3.3.6'
 
   Affix.RESET    = 'affix affix-top affix-bottom'
 
@@ -222,105 +317,10 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: alert.js v3.3.5
- * http://getbootstrap.com/javascript/#alerts
- * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // ALERT CLASS DEFINITION
-  // ======================
-
-  var dismiss = '[data-dismiss="alert"]'
-  var Alert   = function (el) {
-    $(el).on('click', dismiss, this.close)
-  }
-
-  Alert.VERSION = '3.3.5'
-
-  Alert.TRANSITION_DURATION = 150
-
-  Alert.prototype.close = function (e) {
-    var $this    = $(this)
-    var selector = $this.attr('data-target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    var $parent = $(selector)
-
-    if (e) e.preventDefault()
-
-    if (!$parent.length) {
-      $parent = $this.closest('.alert')
-    }
-
-    $parent.trigger(e = $.Event('close.bs.alert'))
-
-    if (e.isDefaultPrevented()) return
-
-    $parent.removeClass('in')
-
-    function removeElement() {
-      // detach from parent, fire event then clean up data
-      $parent.detach().trigger('closed.bs.alert').remove()
-    }
-
-    $.support.transition && $parent.hasClass('fade') ?
-      $parent
-        .one('bsTransitionEnd', removeElement)
-        .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
-      removeElement()
-  }
-
-
-  // ALERT PLUGIN DEFINITION
-  // =======================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.alert')
-
-      if (!data) $this.data('bs.alert', (data = new Alert(this)))
-      if (typeof option == 'string') data[option].call($this)
-    })
-  }
-
-  var old = $.fn.alert
-
-  $.fn.alert             = Plugin
-  $.fn.alert.Constructor = Alert
-
-
-  // ALERT NO CONFLICT
-  // =================
-
-  $.fn.alert.noConflict = function () {
-    $.fn.alert = old
-    return this
-  }
-
-
-  // ALERT DATA-API
-  // ==============
-
-  $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
-
-}(jQuery);
-
-/* ========================================================================
- * Bootstrap: button.js v3.3.5
+ * Bootstrap: button.js v3.3.6
  * http://getbootstrap.com/javascript/#buttons
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -337,7 +337,7 @@
     this.isLoading = false
   }
 
-  Button.VERSION  = '3.3.5'
+  Button.VERSION  = '3.3.6'
 
   Button.DEFAULTS = {
     loadingText: 'loading...'
@@ -438,10 +438,10 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: carousel.js v3.3.5
+ * Bootstrap: carousel.js v3.3.6
  * http://getbootstrap.com/javascript/#carousel
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -469,7 +469,7 @@
       .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
   }
 
-  Carousel.VERSION  = '3.3.5'
+  Carousel.VERSION  = '3.3.6'
 
   Carousel.TRANSITION_DURATION = 600
 
@@ -676,10 +676,10 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: collapse.js v3.3.5
+ * Bootstrap: collapse.js v3.3.6
  * http://getbootstrap.com/javascript/#collapse
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -706,7 +706,7 @@
     if (this.options.toggle) this.toggle()
   }
 
-  Collapse.VERSION  = '3.3.5'
+  Collapse.VERSION  = '3.3.6'
 
   Collapse.TRANSITION_DURATION = 350
 
@@ -888,10 +888,10 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: dropdown.js v3.3.5
+ * Bootstrap: dropdown.js v3.3.6
  * http://getbootstrap.com/javascript/#dropdowns
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -908,7 +908,7 @@
     $(element).on('click.bs.dropdown', this.toggle)
   }
 
-  Dropdown.VERSION = '3.3.5'
+  Dropdown.VERSION = '3.3.6'
 
   function getParent($this) {
     var selector = $this.attr('data-target')
@@ -940,7 +940,7 @@
       if (e.isDefaultPrevented()) return
 
       $this.attr('aria-expanded', 'false')
-      $parent.removeClass('open').trigger('hidden.bs.dropdown', relatedTarget)
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
     })
   }
 
@@ -974,7 +974,7 @@
 
       $parent
         .toggleClass('open')
-        .trigger('shown.bs.dropdown', relatedTarget)
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
     }
 
     return false
@@ -1054,10 +1054,10 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: modal.js v3.3.5
+ * Bootstrap: modal.js v3.3.6
  * http://getbootstrap.com/javascript/#modals
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -1088,7 +1088,7 @@
     }
   }
 
-  Modal.VERSION  = '3.3.5'
+  Modal.VERSION  = '3.3.6'
 
   Modal.TRANSITION_DURATION = 300
   Modal.BACKDROP_TRANSITION_DURATION = 150
@@ -1195,7 +1195,9 @@
     $(document)
       .off('focusin.bs.modal') // guard against infinite focus loop
       .on('focusin.bs.modal', $.proxy(function (e) {
-        if (this.$element[0] !== e.target && !this.$element.has(e.target).length) {
+        if (document !== e.target &&
+            this.$element[0] !== e.target &&
+            !this.$element.has(e.target).length) {
           this.$element.trigger('focus')
         }
       }, this))
@@ -1392,11 +1394,11 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: tooltip.js v3.3.5
+ * Bootstrap: tooltip.js v3.3.6
  * http://getbootstrap.com/javascript/#tooltip
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -1419,7 +1421,7 @@
     this.init('tooltip', element, options)
   }
 
-  Tooltip.VERSION  = '3.3.5'
+  Tooltip.VERSION  = '3.3.6'
 
   Tooltip.TRANSITION_DURATION = 150
 
@@ -1907,10 +1909,10 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: popover.js v3.3.5
+ * Bootstrap: popover.js v3.3.6
  * http://getbootstrap.com/javascript/#popovers
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -1927,7 +1929,7 @@
 
   if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
 
-  Popover.VERSION  = '3.3.5'
+  Popover.VERSION  = '3.3.6'
 
   Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
     placement: 'right',
@@ -2016,10 +2018,10 @@
 }(jQuery);
 
 /* ========================================================================
- * Bootstrap: scrollspy.js v3.3.5
+ * Bootstrap: scrollspy.js v3.3.6
  * http://getbootstrap.com/javascript/#scrollspy
  * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -2045,7 +2047,7 @@
     this.process()
   }
 
-  ScrollSpy.VERSION  = '3.3.5'
+  ScrollSpy.VERSION  = '3.3.6'
 
   ScrollSpy.DEFAULTS = {
     offset: 10
@@ -2188,6 +2190,15 @@
 
 }(jQuery);
 
+/* ========================================================================
+ * Bootstrap: tab.js v3.3.6
+ * http://getbootstrap.com/javascript/#tabs
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
 +function ($) {
   'use strict';
 
@@ -2200,7 +2211,7 @@
     // jscs:enable requireDollarBeforejQueryAssignment
   }
 
-  Tab.VERSION = '3.3.5'
+  Tab.VERSION = '3.3.6'
 
   Tab.TRANSITION_DURATION = 150
 
@@ -2334,6 +2345,152 @@
     .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
 
 }(jQuery);
+
+$(function () {
+
+  var Charts = {
+
+    _HYPHY_REGEX: /-([a-z])/g,
+
+    _cleanAttr: function (obj) {
+      delete obj["chart"]
+      delete obj["value"]
+      delete obj["labels"]
+    },
+
+    doughnut: function (element) {
+      var attrData = $.extend({}, $(element).data())
+      var data     = eval(attrData.value)
+
+      Charts._cleanAttr(attrData)
+
+      var options = $.extend({
+        responsive: true,
+        animation: false,
+        segmentStrokeColor: '#fff',
+        segmentStrokeWidth: 2,
+        percentageInnerCutout: 80,
+      }, attrData)
+
+      new Chart(element.getContext('2d')).Doughnut(data, options)
+    },
+
+    bar: function (element) {
+      var attrData = $.extend({}, $(element).data())
+
+      var data = {
+        labels   : eval(attrData.labels),
+        datasets : eval(attrData.value).map(function (set, index) {
+          return $.extend({
+            fillColor   : (index % 2 ? '#42a5f5' : '#1bc98e'),
+            strokeColor : 'transparent'
+          }, set)
+        })
+      }
+
+      Charts._cleanAttr(attrData)
+
+      var options = $.extend({
+        responsive: true,
+        animation: false,
+        scaleShowVerticalLines: false,
+        scaleOverride: true,
+        scaleSteps: 4,
+        scaleStepWidth: 25,
+        scaleStartValue: 0,
+        barValueSpacing: 10,
+        scaleFontColor: 'rgba(0,0,0,.4)',
+        scaleFontSize: 14,
+        scaleLineColor: 'rgba(0,0,0,.05)',
+        scaleGridLineColor: 'rgba(0,0,0,.05)',
+        barDatasetSpacing: 2
+      }, attrData)
+
+      new Chart(element.getContext('2d')).Bar(data, options)
+    },
+
+    line: function (element) {
+      var attrData = $.extend({}, $(element).data())
+
+      var data = {
+        labels   : eval(attrData.labels),
+        datasets : eval(attrData.value).map(function (set) {
+          return $.extend({
+            fillColor: 'rgba(66, 165, 245, .2)',
+            strokeColor: '#42a5f5',
+            pointStrokeColor: '#fff'
+          }, set)
+        })
+      }
+
+      Charts._cleanAttr(attrData)
+
+      var options = $.extend({
+        animation: false,
+        responsive: true,
+        bezierCurve : true,
+        bezierCurveTension : 0.25,
+        scaleShowVerticalLines: false,
+        pointDot: false,
+        tooltipTemplate: "<%= value %>",
+        scaleOverride: true,
+        scaleSteps: 3,
+        scaleStepWidth: 1000,
+        scaleStartValue: 2000,
+        scaleLineColor: 'rgba(0,0,0,.05)',
+        scaleGridLineColor: 'rgba(0,0,0,.05)',
+        scaleFontColor: 'rgba(0,0,0,.4)',
+        scaleFontSize: 14,
+        scaleLabel: function (label) {
+          return label.value.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+        }
+      }, attrData)
+
+      new Chart(element.getContext('2d')).Line(data, options)
+    },
+
+    'spark-line': function (element) {
+      var attrData = $.extend({}, $(element).data())
+
+      var data = {
+        labels   : eval(attrData.labels),
+        datasets : eval(attrData.value).map(function (set) {
+          return $.extend({
+            fillColor: 'rgba(255,255,255,.3)',
+            strokeColor: '#fff',
+            pointStrokeColor: '#fff'
+          }, set)
+        })
+      }
+
+      Charts._cleanAttr(attrData)
+
+      var options = $.extend({
+        animation: false,
+        responsive: true,
+        bezierCurve : true,
+        bezierCurveTension : 0.25,
+        showScale: false,
+        pointDotRadius: 0,
+        pointDotStrokeWidth: 0,
+        pointDot: false,
+        showTooltips: false
+      }, attrData)
+
+      new Chart(element.getContext('2d')).Line(data, options)
+    }
+  }
+
+  $(document)
+    .on('redraw.bs.charts', function () {
+      $('[data-chart]').each(function () {
+        if ($(this).is(':visible')) {
+          Charts[$(this).attr('data-chart')](this)
+        }
+      })
+    })
+    .trigger('redraw.bs.charts')
+});
 
 /* =========================================================
  * bootstrap-datepicker.js
@@ -4129,149 +4286,3 @@
 	});
 
 }(window.jQuery));
-
-$(function () {
-
-  var Charts = {
-
-    _HYPHY_REGEX: /-([a-z])/g,
-
-    _cleanAttr: function (obj) {
-      delete obj["chart"]
-      delete obj["value"]
-      delete obj["labels"]
-    },
-
-    doughnut: function (element) {
-      var attrData = $.extend({}, $(element).data())
-      var data     = eval(attrData.value)
-
-      Charts._cleanAttr(attrData)
-
-      var options = $.extend({
-        responsive: true,
-        animation: false,
-        segmentStrokeColor: '#fff',
-        segmentStrokeWidth: 2,
-        percentageInnerCutout: 80,
-      }, attrData)
-
-      new Chart(element.getContext('2d')).Doughnut(data, options)
-    },
-
-    bar: function (element) {
-      var attrData = $.extend({}, $(element).data())
-
-      var data = {
-        labels   : eval(attrData.labels),
-        datasets : eval(attrData.value).map(function (set, index) {
-          return $.extend({
-            fillColor   : (index % 2 ? '#42a5f5' : '#1bc98e'),
-            strokeColor : 'transparent'
-          }, set)
-        })
-      }
-
-      Charts._cleanAttr(attrData)
-
-      var options = $.extend({
-        responsive: true,
-        animation: false,
-        scaleShowVerticalLines: false,
-        scaleOverride: true,
-        scaleSteps: 4,
-        scaleStepWidth: 25,
-        scaleStartValue: 0,
-        barValueSpacing: 10,
-        scaleFontColor: 'rgba(0,0,0,.4)',
-        scaleFontSize: 14,
-        scaleLineColor: 'rgba(0,0,0,.05)',
-        scaleGridLineColor: 'rgba(0,0,0,.05)',
-        barDatasetSpacing: 2
-      }, attrData)
-
-      new Chart(element.getContext('2d')).Bar(data, options)
-    },
-
-    line: function (element) {
-      var attrData = $.extend({}, $(element).data())
-
-      var data = {
-        labels   : eval(attrData.labels),
-        datasets : eval(attrData.value).map(function (set) {
-          return $.extend({
-            fillColor: 'rgba(66, 165, 245, .2)',
-            strokeColor: '#42a5f5',
-            pointStrokeColor: '#fff'
-          }, set)
-        })
-      }
-
-      Charts._cleanAttr(attrData)
-
-      var options = $.extend({
-        animation: false,
-        responsive: true,
-        bezierCurve : true,
-        bezierCurveTension : 0.25,
-        scaleShowVerticalLines: false,
-        pointDot: false,
-        tooltipTemplate: "<%= value %>",
-        scaleOverride: true,
-        scaleSteps: 3,
-        scaleStepWidth: 1000,
-        scaleStartValue: 2000,
-        scaleLineColor: 'rgba(0,0,0,.05)',
-        scaleGridLineColor: 'rgba(0,0,0,.05)',
-        scaleFontColor: 'rgba(0,0,0,.4)',
-        scaleFontSize: 14,
-        scaleLabel: function (label) {
-          return label.value.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-        }
-      }, attrData)
-
-      new Chart(element.getContext('2d')).Line(data, options)
-    },
-
-    'spark-line': function (element) {
-      var attrData = $.extend({}, $(element).data())
-
-      var data = {
-        labels   : eval(attrData.labels),
-        datasets : eval(attrData.value).map(function (set) {
-          return $.extend({
-            fillColor: 'rgba(255,255,255,.3)',
-            strokeColor: '#fff',
-            pointStrokeColor: '#fff'
-          }, set)
-        })
-      }
-
-      Charts._cleanAttr(attrData)
-
-      var options = $.extend({
-        animation: false,
-        responsive: true,
-        bezierCurve : true,
-        bezierCurveTension : 0.25,
-        showScale: false,
-        pointDotRadius: 0,
-        pointDotStrokeWidth: 0,
-        pointDot: false,
-        showTooltips: false
-      }, attrData)
-
-      new Chart(element.getContext('2d')).Line(data, options)
-    }
-  }
-
-  $(document)
-    .on('redraw.bs.charts', function () {
-      $('[data-chart]').each(function () {
-        if ($(this).is(':visible')) {
-          Charts[$(this).attr('data-chart')](this)
-        }
-      })
-    })
-    .trigger('redraw.bs.charts')
-});

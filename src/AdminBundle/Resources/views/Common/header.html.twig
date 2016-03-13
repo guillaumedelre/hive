@@ -4,28 +4,52 @@
     </a>
     <div class="iconav-slider">
         <ul class="nav nav-pills iconav-nav">
-            <li {% if app.request.attributes.get('_route') == 'admin_default' %}class="active"{% endif %}>
+            <li {% if app.request.attributes.get('_route') == 'admin_default_index' %}class="active"{% endif %}>
                 <a href="{{ url("admin_default_index") }}" title="Tableau de bord" data-toggle="tooltip" data-placement="right" data-container="body">
                     <span class="icon icon-blackboard"></span>
                     <small class="iconav-nav-label visible-xs-block">Tableau de bord</small>
                 </a>
             </li>
-            <li {% if app.request.attributes.get('_route') == '' %}class="active"{% endif %}>
-                <a href="#" title="Membres" data-toggle="tooltip" data-placement="right" data-container="body">
-                    <span class="icon icon-users"></span>
-                    <small class="iconav-nav-label visible-xs-block">Membres</small>
+            <li {% if app.request.attributes.get('_route') == 'admin_hive_index' %}class="active"{% endif %}>
+                <a href="{{ url("admin_hive_index") }}" title="Hive" data-toggle="tooltip" data-placement="right" data-container="body">
+                    <span class="icon icon-swarm"></span>
+                    <small class="iconav-nav-label visible-xs-block">Hive</small>
                 </a>
             </li>
-            <li {% if app.request.attributes.get('_route') == '' %}class="active"{% endif %}>
-                <a href="#" title="Evénements" data-toggle="tooltip" data-placement="right" data-container="body">
+            <li {% if app.request.attributes.get('_route') == 'admin_user_index' %}class="active"{% endif %}>
+                <a href="{{ url("admin_user_index") }}" title="Utilisateurs" data-toggle="tooltip" data-placement="right" data-container="body">
+                    <span class="icon icon-users"></span>
+                    <small class="iconav-nav-label visible-xs-block">Utilisateurs</small>
+                </a>
+            </li>
+            <li {% if app.request.attributes.get('_route') == 'admin_category_index' %}class="active"{% endif %}>
+                <a href="{{ url("admin_category_index") }}" title="Catégories" data-toggle="tooltip" data-placement="right" data-container="body">
+                    <span class="icon icon-price-tag"></span>
+                    <small class="iconav-nav-label visible-xs-block">Catégories</small>
+                </a>
+            </li>
+            <li {% if app.request.attributes.get('_route') == 'admin_document_index' %}class="active"{% endif %}>
+                <a href="{{ url("admin_document_index") }}" title="Documents" data-toggle="tooltip" data-placement="right" data-container="body">
+                    <span class="icon icon-folder"></span>
+                    <small class="iconav-nav-label visible-xs-block">Documents</small>
+                </a>
+            </li>
+            <li {% if app.request.attributes.get('_route') == 'admin_event_index' %}class="active"{% endif %}>
+                <a href="{{ url("admin_event_index") }}" title="Evénements" data-toggle="tooltip" data-placement="right" data-container="body">
                     <span class="icon icon-calendar"></span>
                     <small class="iconav-nav-label visible-xs-block">Evénements</small>
                 </a>
             </li>
-            <li {% if app.request.attributes.get('_route') == '' %}class="active"{% endif %}>
-                <a href="#" title="Sondages" data-toggle="tooltip" data-placement="right" data-container="body">
+            <li {% if app.request.attributes.get('_route') == 'admin_vote_index' %}class="active"{% endif %}>
+                <a href="{{ url("admin_vote_index") }}" title="Sondages" data-toggle="tooltip" data-placement="right" data-container="body">
                     <span class="icon icon-megaphone"></span>
                     <small class="iconav-nav-label visible-xs-block">Sondages</small>
+                </a>
+            </li>
+            <li {% if app.request.attributes.get('_route') == 'admin_me_index' %}class="active"{% endif %}>
+                <a href="{{ url("admin_me_index") }}" title="Mon profil" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="{{ app.user.username }}">
+                    <img src="https://lh3.googleusercontent.com/-025d5sRgVcc/AAAAAAAAAAI/AAAAAAAAEw0/RrDQ0jMwnvg/photo.jpg" alt="" class="img-circle img-responsive">
+                    <small class="iconav-nav-label visible-xs-block">@{{ app.user.username }}</small>
                 </a>
             </li>
         </ul>

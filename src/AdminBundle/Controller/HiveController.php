@@ -5,16 +5,16 @@ namespace AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class DefaultController extends Controller
+class HiveController extends Controller
 {
     /**
-     * @Route("/", name="admin_default_index")
+     * @Route("/hives", name="admin_hive_index")
      */
     public function indexAction()
     {
         $data = array(
-            'pageTitle' => 'Tableau de bord',
+            'pageTitle' => 'Hive',
         );
-        return $this->render('AdminBundle:Default:index.html.twig', $data);
+        return $this->render('AdminBundle:Hive:index.html.twig', $data);
     }
 }

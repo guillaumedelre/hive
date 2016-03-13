@@ -109,5 +109,247 @@ class Event extends AbstractEntity
     {
         return strval($this->title);
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Event
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Event
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Event
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set startAt
+     *
+     * @param \DateTime $startAt
+     *
+     * @return Event
+     */
+    public function setStartAt($startAt)
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    /**
+     * Get startAt
+     *
+     * @return \DateTime
+     */
+    public function getStartAt()
+    {
+        return $this->startAt;
+    }
+
+    /**
+     * Set endAt
+     *
+     * @param \DateTime $endAt
+     *
+     * @return Event
+     */
+    public function setEndAt($endAt)
+    {
+        $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    /**
+     * Get endAt
+     *
+     * @return \DateTime
+     */
+    public function getEndAt()
+    {
+        return $this->endAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Event
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Event
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \CoreBundle\Entity\User $user
+     *
+     * @return Event
+     */
+    public function setUser(\CoreBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \CoreBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add vote
+     *
+     * @param \CoreBundle\Entity\Vote $vote
+     *
+     * @return Event
+     */
+    public function addVote(\CoreBundle\Entity\Vote $vote)
+    {
+        $this->votes[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote
+     *
+     * @param \CoreBundle\Entity\Vote $vote
+     */
+    public function removeVote(\CoreBundle\Entity\Vote $vote)
+    {
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+}

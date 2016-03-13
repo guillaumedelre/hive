@@ -5,16 +5,16 @@ namespace AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class DefaultController extends Controller
+class MeController extends Controller
 {
     /**
-     * @Route("/", name="admin_default_index")
+     * @Route("/me", name="admin_me_index")
      */
     public function indexAction()
     {
         $data = array(
-            'pageTitle' => 'Tableau de bord',
+            'pageTitle' => 'Mon profil',
         );
-        return $this->render('AdminBundle:Default:index.html.twig', $data);
+        return $this->render('AdminBundle:Me:index.html.twig', $data);
     }
 }
