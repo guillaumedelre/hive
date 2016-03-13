@@ -12,7 +12,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CoreBundle\Entity\Repository\CategoryRepository")
  * @Serializer\XmlRoot("category")
  * @Hateoas\Relation("self", href = "expr('/api/categories/' ~ object.getId())")
  * @Hateoas\Relation(

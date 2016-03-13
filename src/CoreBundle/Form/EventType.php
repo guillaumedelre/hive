@@ -2,9 +2,10 @@
 
 namespace CoreBundle\Form;
 
+use CoreBundle\Entity\Repository\EventRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,14 +21,14 @@ class EventType extends AbstractType
             ->add('type', ChoiceType::class, array(
                 'label' => 'Choose a type',
                 'choices' => [
-                    'Sondage'  => 'vote',
-                    'Evénement' => 'event',
+                    'Evénement' => EventRepository::TYPE_EVENT,
+                    'Sondage'  => EventRepository::TYPE_VOTE,
                 ],
             ))
             ->add('title')
             ->add('description')
-            ->add('startAt', DateTimeType::class)
-            ->add('endAt', DateTimeType::class)
+            ->add('startAt', TextType::class, array('attr' => array('data-provide' => "datepicker")))
+            ->add('endAt', TextType::class, array('attr' => array('data-provide' => "datepicker")))
         ;
     }
     

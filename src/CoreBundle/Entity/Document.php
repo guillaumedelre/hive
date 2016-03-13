@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Document
  *
  * @ORM\Table(name="document")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CoreBundle\Entity\Repository\DocumentRepository")
  * @Serializer\XmlRoot("document")
  * @Hateoas\Relation("self", href = "expr('/api/articles/' ~ object.getId())")
  * @Hateoas\Relation(

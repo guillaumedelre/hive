@@ -11,5 +11,6 @@ namespace CoreBundle\Entity\Repository;
 
 class VoteRepository extends AbstractRepository
 {
-
+    const CHOICE_APPROVED  = true;
+    const CHOICE_REFUSED   = false;
 }

@@ -12,7 +12,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * Event
  *
  * @ORM\Table(name="event")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CoreBundle\Entity\Repository\EventRepository")
  * @Serializer\XmlRoot("event")
  * @Hateoas\Relation("self", href = "expr('/api/events/' ~ object.getId())")
  * @Hateoas\Relation(
@@ -58,7 +58,7 @@ class Event extends AbstractEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;
 

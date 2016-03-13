@@ -11,7 +11,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * Article
  *
  * @ORM\Table(name="article")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CoreBundle\Entity\Repository\ArticleRepository")
  * @Serializer\XmlRoot("article")
  * @Hateoas\Relation("self", href = "expr('/api/articles/' ~ object.getId())")
  * @Hateoas\Relation(

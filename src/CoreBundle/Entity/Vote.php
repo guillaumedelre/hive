@@ -59,6 +59,11 @@ class Vote extends AbstractEntity
     private $event;
 
     /**
+     * @ORM\Column(name="approved", type="boolean")
+     */
+    private $approved;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -186,5 +191,29 @@ class Vote extends AbstractEntity
     public function getEvent()
     {
         return $this->event;
+    }
+
+    /**
+     * Get approved
+     *
+     * @return mixed
+     */
+    public function getApproved()
+    {
+        return $this->approved;
+    }
+
+    /**
+     * Set approved
+     *
+     * @param mixed $approved
+     *
+     * @return Vote
+     */
+    public function setApproved($approved)
+    {
+        $this->approved = $approved;
+
+        return $this;
     }
 }

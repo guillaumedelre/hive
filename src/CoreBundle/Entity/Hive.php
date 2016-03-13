@@ -12,7 +12,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * Hive
  *
  * @ORM\Table(name="hive")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CoreBundle\Entity\Repository\HiveRepository")
  * @Serializer\XmlRoot("hive")
  * @Hateoas\Relation("self", href = "expr('/api/hives/' ~ object.getId())")
  */
