@@ -4,6 +4,7 @@ namespace CoreBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,6 +21,13 @@ class UserType extends AbstractType
             ->add('password')
             ->add('email')
             ->add('isActive')
+            ->add('theme', ChoiceType::class, array(
+                'label' => 'Choose a theme',
+                'choices' => [
+                    'Clair'  => 'light',
+                    'Sombre' => 'inverse',
+                ],
+            ))
             ->add('firstname')
             ->add('lastname')
             ->add('phoneNumber')

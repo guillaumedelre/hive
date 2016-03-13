@@ -42,7 +42,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         currentHive: %hive%
-        theme: %theme%
+        currentTheme: %theme%
 
 # Doctrine Configuration
 doctrine:

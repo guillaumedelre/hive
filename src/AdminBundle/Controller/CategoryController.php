@@ -57,7 +57,7 @@ class CategoryController extends Controller
             if ('POST' === $request->getMethod()) {
                 try {
                     $this->get('core.form.handler.category')->process($request, $entity);
-                    $this->get('session')->getFlashBag()->add('success', 'The simulator has been saved.');
+                    $this->get('session')->getFlashBag()->add('success', 'The category has been saved.');
 
                     return $this->redirectToRoute('admin_category_index');
                 } catch (\Exception $e) {

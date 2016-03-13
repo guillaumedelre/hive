@@ -57,6 +57,11 @@ class User extends AbstractEntity implements UserInterface
     private $isActive;
 
     /**
+     * @ORM\Column(name="theme", type="string", length=32, nullable=false)
+     */
+    private $theme;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=64, nullable=true)
@@ -292,6 +297,30 @@ class User extends AbstractEntity implements UserInterface
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Get theme
+     *
+     * @return string
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * Set theme
+     *
+     * @param string $theme
+     *
+     * @return User
+     */
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
+
+        return $this;
     }
 
     /**

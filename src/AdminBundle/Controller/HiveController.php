@@ -57,7 +57,7 @@ class HiveController extends Controller
             if ('POST' === $request->getMethod()) {
                 try {
                     $this->get('core.form.handler.hive')->process($request, $entity);
-                    $this->get('session')->getFlashBag()->add('success', 'The simulator has been saved.');
+                    $this->get('session')->getFlashBag()->add('success', 'The hive has been saved.');
 
                     return $this->redirectToRoute('admin_hive_index');
                 } catch (\Exception $e) {
