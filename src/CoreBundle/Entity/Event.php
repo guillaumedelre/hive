@@ -51,6 +51,13 @@ class Event extends AbstractEntity
     /**
      * @var string
      *
+     * @ORM\Column(name="type", type="string", length=32, nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
@@ -173,6 +180,30 @@ class Event extends AbstractEntity
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Event
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 
     /**

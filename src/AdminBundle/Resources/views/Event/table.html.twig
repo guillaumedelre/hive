@@ -1,0 +1,30 @@
+<table class="table table-striped table-hover" data-sort="table">
+    <caption>Total : {{ events|length }}</caption>
+    <thead>
+    <tr>
+        <th>Label</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Type</th>
+        <th>Updated</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for event in events %}
+        <tr>
+            <td>{{ event.title }}</td>
+            <td>{{ event.startAt|date }}</td>
+            <td>{{ event.endAt|date }}</td>
+            <td>{{ event.type|capitalize }}</td>
+            <td>{{ event.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
+                    <a href="{{ url('admin_event_edit', {id: event.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="{{ url('admin_event_delete', {id: event.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Delete</a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

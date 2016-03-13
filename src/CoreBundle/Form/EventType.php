@@ -3,6 +3,7 @@
 namespace CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,6 +17,13 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('type', ChoiceType::class, array(
+                'label' => 'Choose a type',
+                'choices' => [
+                    'Sondage'  => 'vote',
+                    'Evénement' => 'event',
+                ],
+            ))
             ->add('title')
             ->add('description')
             ->add('startAt', DateTimeType::class)
