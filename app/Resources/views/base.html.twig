@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}Hive | {{ hive.name }}{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/responsive-calendar-' ~ theme ~ '.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/toolkit-' ~ theme ~ '.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/admin/css/application.css') }}" rel="stylesheet">
+    {% endblock %}
+</head>
+
+<body>
+{% block body %}
+    <div class="with-iconav">
+        {% block header %}{% endblock %}
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("bower_components/jquery/dist/jquery.min.js") }}"></script>
+    <script src="{{ asset("bower_components/tether/dist/js/tether.min.js") }}"></script>
+    <script src="{{ asset("bower_components/bootstrap/dist/js/bootstrap.min.js") }}"></script>
+    <script src="{{ asset("bower_components/tablesorter/jquery.tablesorter.min.js") }}"></script>
+    <script src="{{ asset("bundles/admin/js/responsive-calendar.js") }}"></script>
+    <script src="{{ asset("bundles/admin/js/chart.js") }}"></script>
+    <script src="{{ asset("bundles/admin/js/toolkit.js") }}"></script>
+    <script src="{{ asset("bundles/admin/js/application.js") }}"></script>
+{% endblock %}
+</body>
 </html>
+

@@ -17,3 +17,12 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    theme: light # inverse / light
+
+    hive:
+        name: Les terrasses fleuries
+        address: rue Marx Dormoy
+        zipCode: 92260
+        city: Fontenay-aux-Roses
+        country: France
