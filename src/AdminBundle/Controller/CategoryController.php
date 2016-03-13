@@ -48,7 +48,7 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        /** @var Category */
+        /** @var Category $entity */
         $entity = $this->get('core.repository.category')->find($id);
 
         if (null !== $entity) {
@@ -85,7 +85,7 @@ class CategoryController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        /** @var Category */
+        /** @var Category $entity */
         $entity = $this->get('core.repository.category')->find($id);
 
         if (null !== $entity) {

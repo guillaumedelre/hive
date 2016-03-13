@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Document
@@ -105,6 +107,11 @@ class Document extends AbstractEntity
     private $user;
 
     /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -112,6 +119,29 @@ class Document extends AbstractEntity
         return strval($this->title);
     }
 
+    /**
+     * Set file.
+     *
+     * @param UploadedFile $file
+     *
+     * @return Document
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
 
     /**
      * Get id
@@ -337,5 +367,33 @@ class Document extends AbstractEntity
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/'.$this->path;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads';
     }
 }

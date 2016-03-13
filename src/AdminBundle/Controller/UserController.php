@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        /** @var User */
+        /** @var User $entity */
         $entity = $this->get('core.repository.user')->find($id);
 
         if (null !== $entity) {
@@ -86,7 +86,7 @@ class UserController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        /** @var User */
+        /** @var User $entity */
         $entity = $this->get('core.repository.user')->find($id);
 
         if (null !== $entity) {

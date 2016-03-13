@@ -48,7 +48,7 @@ class HiveController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        /** @var Hive */
+        /** @var Hive $entity */
         $entity = $this->get('core.repository.hive')->find($id);
 
         if (null !== $entity) {
@@ -85,7 +85,7 @@ class HiveController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        /** @var Hive */
+        /** @var Hive $entity */
         $entity = $this->get('core.repository.hive')->find($id);
 
         if (null !== $entity) {
