@@ -65,28 +65,18 @@ class Category extends AbstractEntity
     protected $updatedAt;
 
     /**
-     * @var Category
-     *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children", fetch="EAGER"))
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     * })
-     */
-    private $parent;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
-     */
-    private $children;
-
-    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Document", mappedBy="category")
      */
     private $documents;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
+     */
+    private $articles;
 
     /**
      * @return string
@@ -100,8 +90,8 @@ class Category extends AbstractEntity
      */
     public function __construct()
     {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
         $this->documents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -211,64 +201,6 @@ class Category extends AbstractEntity
     }
 
     /**
-     * Set parent
-     *
-     * @param \CoreBundle\Entity\Category $parent
-     *
-     * @return Category
-     */
-    public function setParent(\CoreBundle\Entity\Category $parent = null)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * Get parent
-     *
-     * @return \CoreBundle\Entity\Category
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * Add child
-     *
-     * @param \CoreBundle\Entity\Category $child
-     *
-     * @return Category
-     */
-    public function addChild(\CoreBundle\Entity\Category $child)
-    {
-        $this->children[] = $child;
-
-        return $this;
-    }
-
-    /**
-     * Remove child
-     *
-     * @param \CoreBundle\Entity\Category $child
-     */
-    public function removeChild(\CoreBundle\Entity\Category $child)
-    {
-        $this->children->removeElement($child);
-    }
-
-    /**
-     * Get children
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-    /**
      * Add document
      *
      * @param \CoreBundle\Entity\Document $document
@@ -300,5 +232,39 @@ class Category extends AbstractEntity
     public function getDocuments()
     {
         return $this->documents;
+    }
+
+    /**
+     * Add article
+     *
+     * @param \CoreBundle\Entity\Article $article
+     *
+     * @return Category
+     */
+    public function addArticle(\CoreBundle\Entity\Article $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \CoreBundle\Entity\Article $article
+     */
+    public function removeArticle(\CoreBundle\Entity\Article $article)
+    {
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }

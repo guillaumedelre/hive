@@ -18,7 +18,7 @@ class VoteType extends AbstractType
         $builder
             ->add('event', EntityType::class , array(
                 'label'      => 'Choose an avent',
-                'class'      => 'ServiceBundle\Entity\Event',
+                'class'      => 'CoreBundle\Entity\Event',
             ))
         ;
     }

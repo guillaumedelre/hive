@@ -16,8 +16,10 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('uid')
+            ->add('username')
             ->add('password')
+            ->add('email')
+            ->add('isActive')
             ->add('firstname')
             ->add('lastname')
             ->add('phoneNumber')
@@ -28,7 +30,7 @@ class UserType extends AbstractType
             ->add('avatar')
             ->add('hive', EntityType::class , array(
                 'label'      => 'Choose a hive',
-                'class'      => 'ServiceBundle\Entity\Hive',
+                'class'      => 'CoreBundle\Entity\Hive',
             ))
         ;
     }

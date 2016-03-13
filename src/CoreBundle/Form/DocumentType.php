@@ -22,7 +22,7 @@ class DocumentType extends AbstractType
             ->add('size')
             ->add('category', EntityType::class , array(
                 'label'      => 'Choose an category',
-                'class'      => 'ServiceBundle\Entity\Category',
+                'class'      => 'CoreBundle\Entity\Category',
             ))
         ;
     }

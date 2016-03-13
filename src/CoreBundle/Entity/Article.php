@@ -43,11 +43,14 @@ class Article extends AbstractEntity
     private $author;
 
     /**
-     * @var integer
+     * @var Category
      *
-     * @ORM\Column(name="category_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles", fetch="EAGER"))
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * })
      */
-    private $categoryId;
+    private $category;
 
     /**
      * @var string
@@ -106,27 +109,27 @@ class Article extends AbstractEntity
     }
 
     /**
-     * Set categoryId
+     * Get category
      *
-     * @param integer $categoryId
-     *
-     * @return Article
+     * @return Category
      */
-    public function setCategoryId($categoryId)
+    public function getCategory()
     {
-        $this->categoryId = $categoryId;
-
-        return $this;
+        return $this->category;
     }
 
     /**
-     * Get categoryId
+     * Set a category
      *
-     * @return integer
+     * @param Article $category
+     *
+     * @return Article
      */
-    public function getCategoryId()
+    public function setCategory($category)
     {
-        return $this->categoryId;
+        $this->category = $category;
+
+        return $this;
     }
 
     /**

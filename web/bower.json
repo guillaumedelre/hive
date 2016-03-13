@@ -2,6 +2,7 @@
   "name": "Hive",
   "dependencies": {
     "jquery": "latest",
+    "fontawesome": "latest",
     "tether": "latest",
     "holderjs": "latest",
     "tablesorter": "latest",

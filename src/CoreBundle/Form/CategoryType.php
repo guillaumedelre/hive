@@ -17,10 +17,6 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('label')
-            ->add('parent', EntityType::class , array(
-                'label'      => 'Choose an parent',
-                'class'      => 'ServiceBundle\Entity\Category',
-            ))
         ;
     }
     
@@ -30,7 +26,8 @@ class CategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CoreBundle\Entity\Category'
-        ));
+            'data_class' => 'CoreBundle\Entity\Category',
+            ))
+        ;
     }
 }

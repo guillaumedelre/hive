@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="fk_user_uid1_idx", columns={"uid"})})
+ * @ORM\Table(name="user", indexes={@ORM\Index(name="fk_user_username1_idx", columns={"username"})})
  * @ORM\Entity
  * @Serializer\XmlRoot("user")
  * @Hateoas\Relation("self", href = "expr('/api/users/' ~ object.getId())")

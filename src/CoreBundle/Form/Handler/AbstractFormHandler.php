@@ -10,7 +10,6 @@ namespace CoreBundle\Form\Handler;
 
 
 use Doctrine\ORM\EntityManager;
-use ServiceBundle\Form\SimulatorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
@@ -61,7 +60,7 @@ abstract class AbstractFormHandler
     {
         $this->form = $this->formFactory
             ->createBuilder($this->formType, $entity)
-            ->add('save', SubmitType::class, array('label_format' => 'Save', 'attr' => ['class' => "btn btn-secondary"]))
+            ->add('save', SubmitType::class, array('label_format' => 'Save', 'attr' => ['class' => "btn btn-default"]))
             ->getForm();
 
         return $this->form;
