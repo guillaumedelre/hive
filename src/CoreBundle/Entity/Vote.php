@@ -57,5 +57,13 @@ class Vote extends AbstractEntity
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     protected $updatedAt;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->id);
+    }
 }
 

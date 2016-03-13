@@ -154,6 +154,5 @@ class User extends AbstractEntity
     {
         return strval($this->uid);
     }
-
 }
 

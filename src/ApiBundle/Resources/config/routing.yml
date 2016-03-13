@@ -1,0 +1,27 @@
+article:
+    type: rest
+    resource: "@ApiBundle/Controller/ArticleController.php"
+
+category:
+    type: rest
+    resource: "@ApiBundle/Controller/CategoryController.php"
+
+document:
+    type: rest
+    resource: "@ApiBundle/Controller/DocumentController.php"
+
+event:
+    type: rest
+    resource: "@ApiBundle/Controller/EventController.php"
+
+hive:
+    type: rest
+    resource: "@ApiBundle/Controller/HiveController.php"
+
+user:
+    type: rest
+    resource: "@ApiBundle/Controller/UserController.php"
+
+vote:
+    type: rest
+    resource: "@ApiBundle/Controller/VoteController.php"

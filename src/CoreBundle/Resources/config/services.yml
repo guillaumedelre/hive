@@ -39,43 +39,43 @@ parameters:
 
 services:
     # repository as services
-    prendo.repository.abstract:
+    core.repository.abstract:
         class: %core.repository.abstract.class%
         abstract: true
         factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
-    prendo.repository.article:
+    core.repository.article:
         class: %core.repository.article.class%
-        parent: prendo.repository.abstract
+        parent: core.repository.abstract
         arguments:
             - %core.entity.article.class%
-    prendo.repository.category:
+    core.repository.category:
         class: %core.repository.category.class%
-        parent: prendo.repository.abstract
+        parent: core.repository.abstract
         arguments:
             - %core.entity.category.class%
-    prendo.repository.document:
+    core.repository.document:
         class: %core.repository.document.class%
-        parent: prendo.repository.abstract
+        parent: core.repository.abstract
         arguments:
             - %core.entity.document.class%
-    prendo.repository.event:
+    core.repository.event:
         class: %core.repository.event.class%
-        parent: prendo.repository.abstract
+        parent: core.repository.abstract
         arguments:
             - %core.entity.event.class%
-    prendo.repository.hive:
+    core.repository.hive:
         class: %core.repository.hive.class%
-        parent: prendo.repository.abstract
+        parent: core.repository.abstract
         arguments:
             - %core.entity.hive.class%
-    prendo.repository.user:
+    core.repository.user:
         class: %core.repository.user.class%
-        parent: prendo.repository.abstract
+        parent: core.repository.abstract
         arguments:
             - %core.entity.user.class%
-    prendo.repository.vote:
+    core.repository.vote:
         class: %core.repository.vote.class%
-        parent: prendo.repository.abstract
+        parent: core.repository.abstract
         arguments:
             - %core.entity.vote.class%
 
