@@ -16,12 +16,9 @@ class HiveType extends AbstractType
     {
         $builder
             ->add('label')
-            ->add('slug')
             ->add('address')
             ->add('zipCode')
             ->add('city')
-            ->add('createdAt', 'datetime')
-            ->add('updatedAt', 'datetime')
         ;
     }
     

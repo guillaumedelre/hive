@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,9 +26,10 @@ class UserType extends AbstractType
             ->add('zipCode')
             ->add('city')
             ->add('avatar')
-            ->add('createdAt', 'datetime')
-            ->add('updatedAt', 'datetime')
-            ->add('hive')
+            ->add('hive', EntityType::class , array(
+                'label'      => 'Choose a hive',
+                'class'      => 'ServiceBundle\Entity\Hive',
+            ))
         ;
     }
     

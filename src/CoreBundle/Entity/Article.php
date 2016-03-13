@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="article")
  * @ORM\Entity
  */
-class Article
+class Article extends AbstractEntity
 {
     /**
      * @var integer
@@ -76,5 +76,13 @@ class Article
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     protected $updatedAt;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->title);
+    }
 }
 

@@ -3,6 +3,7 @@
 namespace CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,13 +17,9 @@ class EventType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('slug')
             ->add('description')
-            ->add('startAt', 'datetime')
-            ->add('endAt', 'datetime')
-            ->add('createdAt', 'datetime')
-            ->add('updatedAt', 'datetime')
-            ->add('user')
+            ->add('startAt', DateTimeType::class)
+            ->add('endAt', DateTimeType::class)
         ;
     }
     

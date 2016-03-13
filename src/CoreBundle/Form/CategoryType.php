@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,10 +17,10 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('label')
-            ->add('slug')
-            ->add('createdAt', 'datetime')
-            ->add('updatedAt', 'datetime')
-            ->add('parent')
+            ->add('parent', EntityType::class , array(
+                'label'      => 'Choose an parent',
+                'class'      => 'ServiceBundle\Entity\Category',
+            ))
         ;
     }
     

@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="category")
  * @ORM\Entity
  */
-class Category
+class Category extends AbstractEntity
 {
     /**
      * @var integer
@@ -77,5 +77,13 @@ class Category
      * @ORM\OneToMany(targetEntity="Document", mappedBy="category")
      */
     private $documents;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->label);
+    }
 }
 

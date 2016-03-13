@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="user", indexes={@ORM\Index(name="fk_user_uid1_idx", columns={"uid"})})
  * @ORM\Entity
  */
-class User
+class User extends AbstractEntity
 {
     /**
      * @var integer
@@ -146,5 +146,14 @@ class User
      * @ORM\OneToMany(targetEntity="Document", mappedBy="user")
      */
     private $documents;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->uid);
+    }
+
 }
 

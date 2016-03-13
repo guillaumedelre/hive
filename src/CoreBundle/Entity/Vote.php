@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="vote")
  * @ORM\Entity
  */
-class Vote
+class Vote extends AbstractEntity
 {
     /**
      * @var integer

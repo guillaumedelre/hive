@@ -2,6 +2,7 @@
 
 namespace CoreBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,10 +16,10 @@ class VoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('createdAt', 'datetime')
-            ->add('updatedAt', 'datetime')
-            ->add('user')
-            ->add('event')
+            ->add('event', EntityType::class , array(
+                'label'      => 'Choose an avent',
+                'class'      => 'ServiceBundle\Entity\Event',
+            ))
         ;
     }
     

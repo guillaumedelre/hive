@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="hive")
  * @ORM\Entity
  */
-class Hive
+class Hive extends AbstractEntity
 {
     /**
      * @var integer
@@ -81,5 +81,13 @@ class Hive
      * @ORM\OneToMany(targetEntity="User", mappedBy="hive")
      */
     private $users;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->label);
+    }
 }
 

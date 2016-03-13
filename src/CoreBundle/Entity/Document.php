@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="document")
  * @ORM\Entity
  */
-class Document
+class Document extends AbstractEntity
 {
     /**
      * @var integer
@@ -94,6 +94,13 @@ class Document
      */
     private $user;
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->title);
+    }
 
 }
 

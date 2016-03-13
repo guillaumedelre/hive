@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="event")
  * @ORM\Entity
  */
-class Event
+class Event extends AbstractEntity
 {
     /**
      * @var integer
@@ -91,5 +91,13 @@ class Event
      * @ORM\OneToMany(targetEntity="Vote", mappedBy="event")
      */
     private $votes;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return strval($this->title);
+    }
 }
 
