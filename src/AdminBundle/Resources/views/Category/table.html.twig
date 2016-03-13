@@ -2,8 +2,9 @@
     <caption>Total : {{ categories|length }}</caption>
     <thead>
     <tr>
-        <th><input type="checkbox" class="select-all" id="selectAll"></th>
         <th>Label</th>
+        <th>Articles</th>
+        <th>Documents</th>
         <th>Updated</th>
         <th></th>
     </tr>
@@ -11,8 +12,9 @@
     <tbody>
     {% for category in categories %}
         <tr>
-            <td><input type="checkbox" class="select-row" value="{{ category.id }}"></td>
             <td>{{ category.label }}</td>
+            <td>{{ category.articles|length }}</td>
+            <td>{{ category.documents|length }}</td>
             <td>{{ category.updatedAt|date }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">

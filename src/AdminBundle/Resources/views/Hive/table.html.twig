@@ -1,0 +1,26 @@
+<table class="table table-striped table-hover" data-sort="table">
+    <caption>Total : {{ hives|length }}</caption>
+    <thead>
+    <tr>
+        <th>Label</th>
+        <th>Utilisateurs</th>
+        <th>Updated</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for hive in hives %}
+        <tr>
+            <td>{{ hive.label }}</td>
+            <td>{{ hive.users|length }}</td>
+            <td>{{ hive.updatedAt|date }}</td>
+            <td>
+                <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
+                    <a href="{{ url('admin_hive_edit', {id: hive.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="{{ url('admin_hive_delete', {id: hive.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Delete</a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
