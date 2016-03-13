@@ -4,12 +4,28 @@ namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Vote
  *
  * @ORM\Table(name="vote")
  * @ORM\Entity
+ * @Serializer\XmlRoot("vote")
+ * @Hateoas\Relation("self", href = "expr('/api/votes/' ~ object.getId())")
+ * @Hateoas\Relation(
+ *     "event",
+ *     href = "expr('/api/events/' ~ object.getEvent().getId())",
+ *     embedded = "expr(object.getEvent())",
+ *     exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getEvent() === null)")
+ * )
+ * @Hateoas\Relation(
+ *     "user",
+ *     href = "expr('/api/users/' ~ object.getUser().getId())",
+ *     embedded = "expr(object.getUser())",
+ *     exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getUser() === null)")
+ * )
  */
 class Vote extends AbstractEntity
 {

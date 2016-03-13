@@ -5,12 +5,22 @@ namespace CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Event
  *
  * @ORM\Table(name="event")
  * @ORM\Entity
+ * @Serializer\XmlRoot("event")
+ * @Hateoas\Relation("self", href = "expr('/api/events/' ~ object.getId())")
+ * @Hateoas\Relation(
+ *     "user",
+ *     href = "expr('/api/users/' ~ object.getUser().getId())",
+ *     embedded = "expr(object.getUser())",
+ *     exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getUser() === null)")
+ * )
  */
 class Event extends AbstractEntity
 {

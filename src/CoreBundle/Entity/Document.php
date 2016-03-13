@@ -4,12 +4,22 @@ namespace CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Document
  *
  * @ORM\Table(name="document")
  * @ORM\Entity
+ * @Serializer\XmlRoot("document")
+ * @Hateoas\Relation("self", href = "expr('/api/articles/' ~ object.getId())")
+ * @Hateoas\Relation(
+ *     "user",
+ *     href = "expr('/api/users/' ~ object.getUser().getId())",
+ *     embedded = "expr(object.getUser())",
+ *     exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getUser() === null)")
+ * )
  */
 class Document extends AbstractEntity
 {

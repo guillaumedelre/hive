@@ -5,12 +5,22 @@ namespace CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
  * @ORM\Entity
+ * @Serializer\XmlRoot("category")
+ * @Hateoas\Relation("self", href = "expr('/api/categories/' ~ object.getId())")
+ * @Hateoas\Relation(
+ *     "parent",
+ *     href = "expr('/api/categories/' ~ object.getParent().getId())",
+ *     embedded = "expr(object.getParent())",
+ *     exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getParent() === null)")
+ * )
  */
 class Category extends AbstractEntity
 {

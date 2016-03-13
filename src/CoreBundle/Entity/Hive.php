@@ -5,12 +5,16 @@ namespace CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * Hive
  *
  * @ORM\Table(name="hive")
  * @ORM\Entity
+ * @Serializer\XmlRoot("hive")
+ * @Hateoas\Relation("self", href = "expr('/api/hives/' ~ object.getId())")
  */
 class Hive extends AbstractEntity
 {

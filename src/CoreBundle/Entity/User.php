@@ -5,12 +5,22 @@ namespace CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 /**
  * User
  *
  * @ORM\Table(name="user", indexes={@ORM\Index(name="fk_user_uid1_idx", columns={"uid"})})
  * @ORM\Entity
+ * @Serializer\XmlRoot("user")
+ * @Hateoas\Relation("self", href = "expr('/api/users/' ~ object.getId())")
+ * @Hateoas\Relation(
+ *     "hive",
+ *     href = "expr('/api/hives/' ~ object.getHive().getId())",
+ *     embedded = "expr(object.getHive())",
+ *     exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getHive() === null)")
+ * )
  */
 class User extends AbstractEntity
 {
