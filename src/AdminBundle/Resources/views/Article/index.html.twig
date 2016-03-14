@@ -1,0 +1,40 @@
+{% extends 'AdminBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    <div class="container">
+
+        <div class="flextable table-actions">
+            <div class="flextable-item flextable-primary">
+                <div class="btn-toolbar-item input-with-icon">
+                    <input type="text" class="form-control input-block" placeholder="Rechercher">
+                    <span class="icon icon-magnifying-glass"></span>
+                </div>
+            </div>
+            <div class="flextable-item">
+                <div class="btn-group" data-toggle="buttons">
+                    <button type="button" class="btn btn-success-outline" data-toggle="collapse" data-target="#formAdd" aria-expanded="false" aria-controls="formAdd">
+                        <span class="icon icon-plus"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="formAdd">
+            {{ include("AdminBundle:Article:form.html.twig") }}
+        </div>
+
+        <div class="table-full">
+            <div class="table-responsive">
+                {{ include("AdminBundle:Article:table.html.twig") }}
+            </div>
+        </div>
+
+        <div class="text-center">
+            {{ include("AdminBundle:Article:pagination.html.twig") }}
+        </div>
+
+    </div>
+{% endblock %}

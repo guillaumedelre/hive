@@ -1,0 +1,10 @@
+{% extends '@Admin/layout.html.twig' %}
+
+{% block content %}
+    {{ parent() }}
+
+    <div class="container">
+        {{ include("AdminBundle:Article:form.html.twig") }}
+    </div>
+
+{% endblock %}

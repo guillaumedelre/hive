@@ -30,6 +30,12 @@
                     <small class="iconav-nav-label visible-xs-block">Catégories</small>
                 </a>
             </li>
+            <li {% if app.request.attributes.get('_route') == 'admin_article_index' %}class="active"{% endif %}>
+                <a href="{{ url("admin_article_index") }}" title="Articles" data-toggle="tooltip" data-placement="right" data-container="body">
+                    <span class="icon icon-text-document-inverted"></span>
+                    <small class="iconav-nav-label visible-xs-block">Articles</small>
+                </a>
+            </li>
             <li {% if app.request.attributes.get('_route') == 'admin_document_index' %}class="active"{% endif %}>
                 <a href="{{ url("admin_document_index") }}" title="Documents" data-toggle="tooltip" data-placement="right" data-container="body">
                     <span class="icon icon-folder"></span>
