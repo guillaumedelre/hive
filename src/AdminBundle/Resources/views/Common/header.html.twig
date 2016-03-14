@@ -48,7 +48,7 @@
                     <small class="iconav-nav-label visible-xs-block">Sondages</small>
                 </a>
             </li>
-            {% if app.user.username is defined and is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_USER') %}
                 <li {% if app.request.attributes.get('_route') == 'admin_me_index' %}class="active"{% endif %}>
                     <a href="{{ url("admin_me_index") }}" title="Mon profil" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="{{ app.user.username }}">
                         <img src="https://lh3.googleusercontent.com/-025d5sRgVcc/AAAAAAAAAAI/AAAAAAAAEw0/RrDQ0jMwnvg/photo.jpg" alt="" class="img-circle img-responsive">
