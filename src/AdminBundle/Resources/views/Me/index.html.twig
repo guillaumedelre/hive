@@ -2,4 +2,8 @@
 
 {% block content %}
     {{ parent() }}
+
+    <div class="container">
+        {{ include("AdminBundle:Me:form.html.twig") }}
+    </div>
 {% endblock %}
