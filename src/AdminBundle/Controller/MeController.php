@@ -27,7 +27,7 @@ class MeController extends Controller
         if ('POST' === $request->getMethod()) {
             try {
                 $this->get('core.form.handler.user')->process($request, $entity);
-                $this->get('session')->getFlashBag()->add('success', 'The user has been saved.');
+                $this->get('session')->getFlashBag()->add('success', 'Le profil a bien été mis à jour.');
 
                 return $this->redirectToRoute('admin_me_index');
             } catch (\Exception $e) {

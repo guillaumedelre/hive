@@ -24,7 +24,7 @@ class DocumentController extends Controller
         if ('POST' === $request->getMethod()) {
             try {
                 $this->get('core.form.handler.document')->process($request, $entity);
-                $this->get('session')->getFlashBag()->add('success', 'The document has been saved.');
+                $this->get('session')->getFlashBag()->add('success', 'Le document a bien été enregistré.');
             } catch (\Exception $e) {
                 $this->get('session')->getFlashBag()->add('danger', $e->getMessage());
             }
@@ -57,7 +57,7 @@ class DocumentController extends Controller
             if ('POST' === $request->getMethod()) {
                 try {
                     $this->get('core.form.handler.document')->process($request, $entity);
-                    $this->get('session')->getFlashBag()->add('success', 'The document has been saved.');
+                    $this->get('session')->getFlashBag()->add('success', 'Le document a bien été enregistré.');
 
                     return $this->redirectToRoute('admin_document_index');
                 } catch (\Exception $e) {
@@ -92,7 +92,7 @@ class DocumentController extends Controller
             unlink($entity->getAbsolutePath());
             $this->getDoctrine()->getManager()->remove($entity);
             $this->getDoctrine()->getManager()->flush();
-            $this->get('session')->getFlashBag()->add('info', 'The document has been deleted.');
+            $this->get('session')->getFlashBag()->add('info', 'Le document a bien été supprimé.');
         } else {
             $this->get('session')->getFlashBag()->add('danger', "Document #$id not found");
         }

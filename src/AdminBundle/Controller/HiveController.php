@@ -26,7 +26,7 @@ class HiveController extends Controller
         if ('POST' === $request->getMethod()) {
             try {
                 $this->get('core.form.handler.hive')->process($request, $entity);
-                $this->get('session')->getFlashBag()->add('success', 'The hive has been saved.');
+                $this->get('session')->getFlashBag()->add('success', 'La ruche a bien été enregistrée.');
             } catch (\Exception $e) {
                 $this->get('session')->getFlashBag()->add('danger', $e->getMessage());
             }
@@ -61,7 +61,7 @@ class HiveController extends Controller
             if ('POST' === $request->getMethod()) {
                 try {
                     $this->get('core.form.handler.hive')->process($request, $entity);
-                    $this->get('session')->getFlashBag()->add('success', 'The hive has been saved.');
+                    $this->get('session')->getFlashBag()->add('success', 'La ruche a bien été enregistrée.');
 
                     return $this->redirectToRoute('admin_hive_index');
                 } catch (\Exception $e) {
@@ -97,7 +97,7 @@ class HiveController extends Controller
         if (null !== $entity) {
             $this->getDoctrine()->getManager()->remove($entity);
             $this->getDoctrine()->getManager()->flush();
-            $this->get('session')->getFlashBag()->add('info', 'The hive has been deleted.');
+            $this->get('session')->getFlashBag()->add('info', 'La ruche a bien été supprimée.');
         } else {
             $this->get('session')->getFlashBag()->add('danger', "Hive #$id not found");
         }
