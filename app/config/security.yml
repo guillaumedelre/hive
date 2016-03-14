@@ -1,6 +1,8 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+        CoreBundle\Entity\User: plaintext
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
@@ -9,9 +11,6 @@ security:
                 class: CoreBundle:User
                 property: username
 
-    encoders:
-        CoreBundle\Entity\User: plaintext
-
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -19,13 +18,14 @@ security:
             security: false
 
         main:
-            provider: in_database
-            anonymous: ~
             # activate different ways to authenticate
-
-            http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
+            http_basic:
+                provider: in_database
+            logout:
+                path: admin_security_logout
+                target: admin_default_index
+                invalidate_session: true
+                delete_cookies: true
             anonymous: ~
 
     access_control:
@@ -33,5 +33,5 @@ security:
         - { path: ^/admin, roles: ROLE_USER }
 
     role_hierarchy:
-        ROLE_ADMIN:      [ROLE_USER]
-        ROLE_SUPERADMIN: [ROLE_ADMIN]
+        ROLE_ADMIN:      ROLE_USER
+        ROLE_SUPERADMIN: ROLE_ADMIN
