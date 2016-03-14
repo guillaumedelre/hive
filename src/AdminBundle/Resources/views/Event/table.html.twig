@@ -2,11 +2,11 @@
     <caption>Total : {{ events|length }}</caption>
     <thead>
     <tr>
-        <th>Label</th>
-        <th>Start</th>
-        <th>End</th>
+        <th>Libellé</th>
+        <th>Début</th>
+        <th>Fin</th>
         <th>Type</th>
-        <th>Updated</th>
+        <th>Mise à jour</th>
         <th></th>
     </tr>
     </thead>
@@ -20,8 +20,8 @@
             <td>{{ event.updatedAt|date }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
-                    <a href="{{ url('admin_event_edit', {id: event.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="{{ url('admin_event_delete', {id: event.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Delete</a>
+                    <a href="{{ url('admin_event_edit', {id: event.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Editer</a>
+                    <a href="{{ url('admin_event_delete', {id: event.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Supprimer</a>
                 </div>
             </td>
         </tr>

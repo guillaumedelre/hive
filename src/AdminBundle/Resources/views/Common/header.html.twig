@@ -11,9 +11,9 @@
                 </a>
             </li>
             <li {% if app.request.attributes.get('_route') == 'admin_hive_index' %}class="active"{% endif %}>
-                <a href="{{ url("admin_hive_index") }}" title="Hive" data-toggle="tooltip" data-placement="right" data-container="body">
+                <a href="{{ url("admin_hive_index") }}" title="Ruches" data-toggle="tooltip" data-placement="right" data-container="body">
                     <span class="icon icon-swarm"></span>
-                    <small class="iconav-nav-label visible-xs-block">Hive</small>
+                    <small class="iconav-nav-label visible-xs-block">Ruches</small>
                 </a>
             </li>
             <li {% if app.request.attributes.get('_route') == 'admin_user_index' %}class="active"{% endif %}>

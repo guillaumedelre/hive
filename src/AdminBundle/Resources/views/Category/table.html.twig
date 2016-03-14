@@ -2,10 +2,10 @@
     <caption>Total : {{ categories|length }}</caption>
     <thead>
     <tr>
-        <th>Label</th>
+        <th>Libellé</th>
         <th>Articles</th>
         <th>Documents</th>
-        <th>Updated</th>
+        <th>Mise à jour</th>
         <th></th>
     </tr>
     </thead>
@@ -18,8 +18,8 @@
             <td>{{ category.updatedAt|date }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
-                    <a href="{{ url('admin_category_edit', {id: category.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="{{ url('admin_category_delete', {id: category.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Delete</a>
+                    <a href="{{ url('admin_category_edit', {id: category.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Editer</a>
+                    <a href="{{ url('admin_category_delete', {id: category.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Supprimer</a>
                 </div>
             </td>
         </tr>

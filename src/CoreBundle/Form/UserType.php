@@ -4,7 +4,10 @@ namespace CoreBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,27 +20,27 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('password')
-            ->add('email')
-            ->add('isActive')
+            ->add('username', TextType::class, array('label' => 'Nom d\'utilisateur'))
+            ->add('password', PasswordType::class, array('label' => 'Mot de passe'))
+            ->add('email', TextType::class, array('label' => 'Email'))
+            ->add('isActive', CheckboxType::class, array('label' => 'Activé'))
             ->add('theme', ChoiceType::class, array(
-                'label' => 'Choose a theme',
+                'label' => 'Sélectionner un thème',
                 'choices' => [
                     'Clair'  => 'light',
                     'Sombre' => 'inverse',
                 ],
             ))
-            ->add('firstname')
-            ->add('lastname')
-            ->add('phoneNumber')
-            ->add('cellNumber')
-            ->add('address')
-            ->add('zipCode')
-            ->add('city')
-            ->add('avatar')
+            ->add('firstname', TextType::class, array('label' => 'Prénom'))
+            ->add('lastname', TextType::class, array('label' => 'Nom'))
+            ->add('phoneNumber', TextType::class, array('label' => 'Téléphone fixe'))
+            ->add('cellNumber', TextType::class, array('label' => 'Téléphone portable'))
+            ->add('address', TextType::class, array('label' => 'Adresse'))
+            ->add('zipCode', TextType::class, array('label' => 'Code postal'))
+            ->add('city', TextType::class, array('label' => 'Ville'))
+            ->add('avatar', TextType::class, array('label' => 'Avatar'))
             ->add('hive', EntityType::class , array(
-                'label'      => 'Choose a hive',
+                'label'      => 'Sélectionner une ruche',
                 'class'      => 'CoreBundle\Entity\Hive',
             ))
         ;

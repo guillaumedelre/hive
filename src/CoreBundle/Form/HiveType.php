@@ -3,6 +3,7 @@
 namespace CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,10 +16,10 @@ class HiveType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('label')
-            ->add('address')
-            ->add('zipCode')
-            ->add('city')
+            ->add('label', TextType::class, array('label' => 'Libellé'))
+            ->add('address', TextType::class, array('label' => 'Adresse'))
+            ->add('zipCode', TextType::class, array('label' => 'Code postal'))
+            ->add('city', TextType::class, array('label' => 'Ville'))
         ;
     }
     

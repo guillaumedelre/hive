@@ -2,13 +2,13 @@
     <caption>Total : {{ users|length }}</caption>
     <thead>
     <tr>
-        <th>Username</th>
+        <th>Utilisateur</th>
         <th>Articles</th>
         <th>Documents</th>
-        <th>Events</th>
+        <th>Evénements</th>
         <th>Votes</th>
         <th>Hive</th>
-        <th>Updated</th>
+        <th>Mise à jour</th>
         <th></th>
     </tr>
     </thead>
@@ -24,8 +24,8 @@
             <td>{{ user.updatedAt|date }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
-                    <a href="{{ url('admin_user_edit', {id: user.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Edit</a>
-                    <a href="{{ url('admin_user_delete', {id: user.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Delete</a>
+                    <a href="{{ url('admin_user_edit', {id: user.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Editer</a>
+                    <a href="{{ url('admin_user_delete', {id: user.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Supprimer</a>
                 </div>
             </td>
         </tr>

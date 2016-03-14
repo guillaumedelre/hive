@@ -19,11 +19,11 @@ class VoteType extends AbstractType
     {
         $builder
             ->add('event', EntityType::class , array(
-                'label'      => 'Choose an avent',
+                'label'      => 'Sélectionner un événement',
                 'class'      => 'CoreBundle\Entity\Event',
             ))
             ->add('approved', ChoiceType::class, array(
-                'label' => 'Make a choice',
+                'label' => 'Sélectionner un choix',
                 'choices' => [
                     'Approuvé' => VoteRepository::CHOICE_APPROVED,
                     'Refusé' => VoteRepository::CHOICE_REFUSED,

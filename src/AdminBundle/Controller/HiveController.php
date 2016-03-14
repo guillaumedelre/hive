@@ -37,7 +37,7 @@ class HiveController extends Controller
             'totalPages'  => ceil(count($this->get('core.repository.hive')->findAll()) / $limit),
             "hives"  => $this->get('core.repository.hive')->findBy([], ['updatedAt' => 'DESC']),
             "form"        => $this->get('core.form.handler.hive')->getForm()->createView(),
-            'pageTitle'   => 'Hives',
+            'pageTitle'   => 'Ruches',
         );
 
         return $this->render('AdminBundle:Hive:index.html.twig', $data);
@@ -72,7 +72,7 @@ class HiveController extends Controller
         }
 
         $data = array(
-            'pageTitle'   => 'Hives',
+            'pageTitle'   => 'Ruches',
             "hive" => $entity,
             "form" => $this->get('core.form.handler.hive')->getForm()->createView(),
         );
