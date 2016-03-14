@@ -92,7 +92,7 @@ class User extends AbstractEntity implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=2, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
 
