@@ -10,18 +10,20 @@
                     <small class="iconav-nav-label visible-xs-block">Tableau de bord</small>
                 </a>
             </li>
-            <li {% if app.request.attributes.get('_route') == 'admin_hive_index' %}class="active"{% endif %}>
-                <a href="{{ url("admin_hive_index") }}" title="Ruches" data-toggle="tooltip" data-placement="right" data-container="body">
-                    <span class="icon icon-swarm"></span>
-                    <small class="iconav-nav-label visible-xs-block">Ruches</small>
-                </a>
-            </li>
-            <li {% if app.request.attributes.get('_route') == 'admin_user_index' %}class="active"{% endif %}>
-                <a href="{{ url("admin_user_index") }}" title="Utilisateurs" data-toggle="tooltip" data-placement="right" data-container="body">
-                    <span class="icon icon-users"></span>
-                    <small class="iconav-nav-label visible-xs-block">Utilisateurs</small>
-                </a>
-            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li {% if app.request.attributes.get('_route') == 'admin_hive_index' %}class="active"{% endif %}>
+                    <a href="{{ url("admin_hive_index") }}" title="Ruches" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-swarm"></span>
+                        <small class="iconav-nav-label visible-xs-block">Ruches</small>
+                    </a>
+                </li>
+                <li {% if app.request.attributes.get('_route') == 'admin_user_index' %}class="active"{% endif %}>
+                    <a href="{{ url("admin_user_index") }}" title="Utilisateurs" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-users"></span>
+                        <small class="iconav-nav-label visible-xs-block">Utilisateurs</small>
+                    </a>
+                </li>
+            {% endif %}
             <li {% if app.request.attributes.get('_route') == 'admin_category_index' %}class="active"{% endif %}>
                 <a href="{{ url("admin_category_index") }}" title="Catégories" data-toggle="tooltip" data-placement="right" data-container="body">
                     <span class="icon icon-price-tag"></span>
@@ -46,7 +48,7 @@
                     <small class="iconav-nav-label visible-xs-block">Sondages</small>
                 </a>
             </li>
-            {% if app.user.username is defined %}
+            {% if app.user.username is defined and is_granted('ROLE_ADMIN') %}
                 <li {% if app.request.attributes.get('_route') == 'admin_me_index' %}class="active"{% endif %}>
                     <a href="{{ url("admin_me_index") }}" title="Mon profil" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="{{ app.user.username }}">
                         <img src="https://lh3.googleusercontent.com/-025d5sRgVcc/AAAAAAAAAAI/AAAAAAAAEw0/RrDQ0jMwnvg/photo.jpg" alt="" class="img-circle img-responsive">

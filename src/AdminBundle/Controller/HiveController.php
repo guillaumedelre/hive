@@ -14,6 +14,8 @@ class HiveController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'avez pas les droits suffisant pour accéder à cette page!');
+
         $limit = $request->query->get('limit') ? $request->query->get('limit') : 20;
         $offset = $request->query->get('offset') ? $request->query->get('offset') : 0;
 
@@ -48,6 +50,8 @@ class HiveController extends Controller
      */
     public function editAction(Request $request, $id)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'avez pas les droits suffisant pour accéder à cette page!');
+
         /** @var Hive $entity */
         $entity = $this->get('core.repository.hive')->find($id);
 
@@ -85,6 +89,8 @@ class HiveController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'avez pas les droits suffisant pour accéder à cette page!');
+
         /** @var Hive $entity */
         $entity = $this->get('core.repository.hive')->find($id);
 
