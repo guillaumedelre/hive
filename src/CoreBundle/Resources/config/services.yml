@@ -83,7 +83,7 @@ services:
     core.form.handler.abstract:
         class: %core.form.handler.abstract.class%
         abstract: true
-        arguments: [ "@doctrine.orm.default_entity_manager", "@form.factory" ]
+        arguments: [ "@doctrine.orm.default_entity_manager", "@form.factory", "@service_container" ]
     core.form.handler.article:
         class: %core.form.handler.article.class%
         parent: core.form.handler.abstract

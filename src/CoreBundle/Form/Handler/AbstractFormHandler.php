@@ -10,6 +10,7 @@ namespace CoreBundle\Form\Handler;
 
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
@@ -30,15 +31,20 @@ abstract class AbstractFormHandler
     /** @var Form */
     protected $form;
 
+    /** @var ContainerInterface */
+    protected $container;
+
     /**
      * AbstractFormHandler constructor.
      * @param EntityManager $em
      * @param FormFactory $formFactory
+     * @param ContainerInterface $container
      */
-    public function __construct(EntityManager $em, FormFactory $formFactory)
+    public function __construct(EntityManager $em, FormFactory $formFactory, ContainerInterface $container)
     {
         $this->em = $em;
         $this->formFactory = $formFactory;
+        $this->container = $container;
     }
 
     /**

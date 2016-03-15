@@ -20,6 +20,7 @@
             <td>{{ document.updatedAt|date }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
+                    <a href="{{ asset(document.path) }}" target="_blank" class="btn btn btn-primary-outline"><i class="fa fa-download"></i> Télécharger</a>
                     <a href="{{ url('admin_document_edit', {id: document.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Editer</a>
                     <a href="{{ url('admin_document_delete', {id: document.id}) }}" class="btn btn btn-danger-outline delete-link"><i class="fa fa-remove"></i> Supprimer</a>
                 </div>
