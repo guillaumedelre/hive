@@ -220,6 +220,11 @@ class User extends AbstractEntity implements UserInterface
         return $this->username;
     }
 
+    public function getFullname()
+    {
+        return ucwords($this->firstname . ' ' . $this->lastname);
+    }
+
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.

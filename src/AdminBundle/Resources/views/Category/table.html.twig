@@ -5,6 +5,7 @@
         <th>Libellé</th>
         <th>Articles</th>
         <th>Documents</th>
+        <th>Utilisateur</th>
         <th>Mise à jour</th>
         <th></th>
     </tr>
@@ -15,7 +16,7 @@
             <td>{{ category.label }}</td>
             <td>{{ category.articles|length }}</td>
             <td>{{ category.documents|length }}</td>
-            <td>{{ category.user }}</td>
+            <td>{{ category.user.fullname }}</td>
             <td>{{ category.updatedAt|date('d/m/Y') }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">

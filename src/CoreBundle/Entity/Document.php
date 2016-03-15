@@ -427,4 +427,25 @@ class Document extends AbstractEntity
         // when displaying uploaded doc/image in the view.
         return 'upload/documents/';
     }
+
+    function formatSize() {
+        $size = $this->getSize();
+
+        if ($size < 1024) {
+            return $size . ' B';
+        }
+        else {
+            $size = $size / 1024;
+            $units = ['KB', 'MB', 'GB', 'TB'];
+            foreach ($units as $unit) {
+                if (round($size, 2) >= 1024) {
+                    $size = $size / 1024;
+                }
+                else {
+                    break;
+                }
+            }
+            return round($size, 2) . ' ' . $unit;
+        }
+    }
 }

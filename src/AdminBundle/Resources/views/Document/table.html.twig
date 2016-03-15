@@ -15,8 +15,8 @@
         <tr>
             <td>{{ document.title }}</td>
             <td>{{ document.category }}</td>
-            <td>{{ document.user }}</td>
-            <td>{{ document.size }}</td>
+            <td>{{ document.user.fullname }}</td>
+            <td>{{ document.formatSize }}</td>
             <td>{{ document.updatedAt|date('d/m/Y') }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">

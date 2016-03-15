@@ -3,6 +3,7 @@
     <thead>
     <tr>
         <th>Libellé</th>
+        <th>Utilisateur</th>
         <th>Début</th>
         <th>Fin</th>
         <th>Type</th>
@@ -14,6 +15,7 @@
     {% for event in events %}
         <tr>
             <td>{{ event.title }}</td>
+            <td>{{ event.user.fullname }}</td>
             <td>{{ event.startAt|date('d/m/Y') }}</td>
             <td>{{ event.endAt|date('d/m/Y') }}</td>
             <td>{{ event.type|capitalize }}</td>
