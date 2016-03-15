@@ -23,11 +23,17 @@ class ArticleHandler extends AbstractFormHandler
      */
     public function process(Request $request, $entity)
     {
+        /*
+         * si role = user
         $username = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
+        $user     = $this->container->get('core.repository.user')->findOneByUsername($username);
 
-        $user = $this->container->get('core.repository.user')->findOneByUsername($username);
+        if (null === $user) {
+            throw new \Exception('Utilisateur #' . $username . ' non valide.');
+        }
 
         $entity->setAuthor($user);
+        */
 
         return parent::process($request, $entity);
     }

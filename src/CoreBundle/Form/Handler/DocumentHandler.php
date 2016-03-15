@@ -23,14 +23,22 @@ class DocumentHandler extends AbstractFormHandler
     {
         $this->form->handleRequest($request);
 
-        $filename   = $entity->getFile()->getClientOriginalName();
-        $username   = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
-        $user       = $this->container->get('core.repository.user')->findOneByUsername($username);
+        /*
+         * si role = user
+        $username = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
+        $user     = $this->container->get('core.repository.user')->findOneByUsername($username);
 
+        if (null === $user) {
+            throw new \Exception('Utilisateur #' . $username . ' non valide.');
+        }
+
+        $entity->setUser($user);
+        */
+
+        $filename   = $entity->getFile()->getClientOriginalName();
         $entity->getFile()->move($entity->getUploadDir(), $filename);
         $entity->setSize($entity->getFile()->getClientSize());
         $entity->setPath($entity->getUploadDir() .$filename);
-        $entity->setUser($user);
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
             $this->em->persist($entity);

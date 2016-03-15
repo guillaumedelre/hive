@@ -89,7 +89,7 @@ class DocumentController extends Controller
         $entity = $this->get('core.repository.document')->find($id);
 
         if (null !== $entity) {
-            @unlink($entity->getAbsolutePath());
+            @unlink($entity->getPath());
             $this->getDoctrine()->getManager()->remove($entity);
             $this->getDoctrine()->getManager()->flush();
             $this->get('session')->getFlashBag()->add('info', 'Le document a bien été supprimé.');

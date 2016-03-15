@@ -22,6 +22,10 @@ class DocumentType extends AbstractType
             ->add('title', TextType::class, array('label' => 'Titre'))
             ->add('description', TextareaType::class, array('label' => 'Description'))
             ->add('file', FileType::class)
+            ->add('user', EntityType::class , array(
+                'label'      => 'Sélectionner un utilisateur',
+                'class'      => 'CoreBundle\Entity\User',
+            ))
             ->add('category', EntityType::class , array(
                 'label'      => 'Sélectionner une catégorie',
                 'class'      => 'CoreBundle\Entity\Category',

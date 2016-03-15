@@ -23,7 +23,6 @@
                         <small class="iconav-nav-label visible-xs-block">Utilisateurs</small>
                     </a>
                 </li>
-            {% endif %}
             <li {% if app.request.attributes.get('_route') == 'admin_category_index' %}class="active"{% endif %}>
                 <a href="{{ url("admin_category_index") }}" title="Catégories" data-toggle="tooltip" data-placement="right" data-container="body">
                     <span class="icon icon-price-tag"></span>
@@ -54,6 +53,7 @@
                     <small class="iconav-nav-label visible-xs-block">Sondages</small>
                 </a>
             </li>
+            {% endif %}
             {% if is_granted('ROLE_USER') %}
                 <li {% if app.request.attributes.get('_route') == 'admin_me_index' %}class="active"{% endif %}>
                     <a href="{{ url("admin_me_index") }}" title="Mon profil" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="{{ app.user.username }}">

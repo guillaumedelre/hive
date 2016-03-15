@@ -22,6 +22,10 @@ class ArticleType extends AbstractType
                 'label'      => 'Sélectionner une catégorie',
                 'class'      => 'CoreBundle\Entity\Category',
             ))
+            ->add('author', EntityType::class , array(
+                'label'      => 'Sélectionner un utilisateur',
+                'class'      => 'CoreBundle\Entity\User',
+            ))
             ->add('title', TextType::class, array('label' => 'Titre'))
             ->add('description', TextareaType::class, array('label' => 'Description'))
         ;
