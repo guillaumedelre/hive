@@ -1,0 +1,12 @@
+{% for document in documents %}
+    <blockquote>
+        <h3 class="dashhead-title">
+            {{ document.title|capitalize }}
+            <a href="{{ asset(document.path) }}" target="_blank" class="btn btn-sm btn-primary-outline pull-right"><i class="fa fa-download"></i> Télécharger</a>
+        </h3>
+        <p>{{ document.description|nl2br }}</p>
+        <footer>
+            <span class="label label-primary">{{ document.category|capitalize }}</span> <cite title="Auteur">{{ document.user.firstname|capitalize }} {{ document.user.lastname|capitalize}}</cite>, le {{ document.updatedAt|date('d/m/Y') }}
+        </footer>
+    </blockquote>
+{% endfor %}

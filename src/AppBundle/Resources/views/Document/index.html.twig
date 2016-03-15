@@ -1,0 +1,33 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="active">Documents</li>
+        </ol>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                {{ include("AppBundle:Document:categories.html.twig") }}
+            </div>
+
+            <div class="col-md-10">
+                <div class="table-full">
+                    <div class="table-responsive">
+                        {{ include("AppBundle:Document:listing.html.twig") }}
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    {{ include("AppBundle:Document:pagination.html.twig") }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

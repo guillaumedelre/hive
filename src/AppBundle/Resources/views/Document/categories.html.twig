@@ -1,11 +1,11 @@
 <ul class="nav nav-pills nav-stacked">
     <li class="nav-header">Catégories</li>
     <li {% if currentCategory is not defined %}class="active"{% endif %}>
-        <a href="{{ url('app_article_index', {'hiveSlug': me.hive.slug}) }}">Toutes</a>
+        <a href="{{ url('app_document_index', {'hiveSlug': me.hive.slug}) }}">Toutes</a>
     </li>
     {% for category in categories %}
         <li {% if currentCategory is defined and category.id == currentCategory.id %}class="active"{% endif %}>
-            <a href="{{ url('app_article_by_category', {'hiveSlug': me.hive.slug, 'categorySlug': category.slug}) }}">{{ category.label|capitalize }}</a>
+            <a href="{{ url('app_document_by_category', {'hiveSlug': me.hive.slug, 'categorySlug': category.slug}) }}">{{ category.label|capitalize }}</a>
         </li>
     {% endfor %}
 </ul>

@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li {% if app.request.attributes.get('_route') == 'app_document_index' %}class="active"{% endif %}>
-                    <a href="{#{ url("app_document_index") }#}" title="Documents" data-toggle="tooltip" data-placement="right" data-container="body">
+                    <a href="{{ url("app_document_index", {'hiveSlug': me.hive.slug}) }}" title="Documents" data-toggle="tooltip" data-placement="right" data-container="body">
                         <span class="icon icon-folder"></span>
                         <small class="iconav-nav-label visible-xs-block">Documents</small>
                     </a>
