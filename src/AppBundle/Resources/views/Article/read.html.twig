@@ -9,7 +9,7 @@
         <li>
             <a href="{{ url('app_article_index', {'hiveSlug': me.hive.slug}) }}">Articles</a>
         </li>
-        <li class="active">{{ article.title }}</li>
+        <li class="active">{{ article.title|capitalize }}</li>
     </ol>
 </div>
 
@@ -20,7 +20,7 @@
         </div>
 
         <div class="col-md-10">
-            <h3 class="dashhead-title">{{ article.title }}</h3>
+            <h3 class="dashhead-title">{{ article.title|capitalize }}</h3>
             <blockquote>
                 <p>{{ article.description|nl2br }}</p>
                 <footer>

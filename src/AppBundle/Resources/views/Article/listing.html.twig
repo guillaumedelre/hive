@@ -1,11 +1,11 @@
 {% for article in articles %}
     <blockquote>
         <h3 class="dashhead-title">
-            <a href="{{ url('app_article_read', {"hiveSlug": me.hive.slug, "articleSlug": article.slug}) }}">{{ article.title }}</a>
+            <a href="{{ url('app_article_read', {"hiveSlug": me.hive.slug, "articleSlug": article.slug}) }}">{{ article.title|capitalize }}</a>
         </h3>
         <p>{{ article.description[0:255] }}...</p>
         <footer>
-            <span class="label label-primary">{{ article.category }}</span> <cite title="Auteur">{{ article.author.firstname|capitalize }} {{ article.author.lastname|capitalize}}</cite>, le {{ article.updatedAt|date('d/m/Y') }}
+            <span class="label label-primary">{{ article.category|capitalize }}</span> <cite title="Auteur">{{ article.author.firstname|capitalize }} {{ article.author.lastname|capitalize}}</cite>, le {{ article.updatedAt|date('d/m/Y') }}
         </footer>
     </blockquote>
 {% endfor %}

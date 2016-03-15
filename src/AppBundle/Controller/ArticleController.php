@@ -30,9 +30,9 @@ class ArticleController extends Controller
         $me = $this->get('core.service.me')->getUser();
 
         if ($hiveSlug !== $me->getHive()->getSlug()) {
-            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnu.");
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
 
-            return $this->redirectToRoute('app_default_index');
+            return $this->redirectToRoute('app_default_index', ['hiveSlug' => $me->getHive()->getSlug()]);
         }
 
         $articles = $this->get('core.repository.article')->getByHive($me->getHive(), $page);
@@ -60,13 +60,19 @@ class ArticleController extends Controller
         $me = $this->get('core.service.me')->getUser();
 
         if ($hiveSlug !== $me->getHive()->getSlug()) {
-            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnu.");
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
 
             return $this->redirectToRoute('app_default_index');
         }
 
         /** @var Article $article */
         $article = $this->get('core.repository.article')->findOneBySlug($articleSlug);
+
+        if (null === $article) {
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
+
+            return $this->redirectToRoute('app_default_index', ['hiveSlug' => $me->getHive()->getSlug()]);
+        }
 
         $categories = $this->get('core.repository.category')->getAllByHive($me->getHive());
 
@@ -91,17 +97,17 @@ class ArticleController extends Controller
         $me = $this->get('core.service.me')->getUser();
 
         if ($hiveSlug !== $me->getHive()->getSlug()) {
-            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnu.");
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
 
-            return $this->redirectToRoute('app_default_index');
+            return $this->redirectToRoute('app_default_index', ['hiveSlug' => $me->getHive()->getSlug()]);
         }
 
         $category = $this->get('core.repository.category')->findOneBySlug($categorySlug);
 
         if (null === $category) {
-            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnu.");
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
 
-            return $this->redirectToRoute('app_default_index');
+            return $this->redirectToRoute('app_default_index', ['hiveSlug' => $me->getHive()->getSlug()]);
         }
 
         $articles = $this->get('core.repository.article')->getByHiveAndCategory($me->getHive(), $category, $page);
