@@ -1,0 +1,36 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ url('app_article_index', {'hiveSlug': me.hive.slug}) }}">Articles</a>
+            </li>
+            <li class="active">{{ currentCategory.label }}</li>
+        </ol>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                {{ include("AppBundle:Article:categories.html.twig") }}
+            </div>
+
+            <div class="col-md-10">
+                <div class="table-full">
+                    <div class="table-responsive">
+                        {{ include("AppBundle:Article:listing.html.twig") }}
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    {{ include("AppBundle:Article:pagination.html.twig") }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

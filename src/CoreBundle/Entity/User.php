@@ -172,6 +172,13 @@ class User extends AbstractEntity implements UserInterface
     private $documents;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="user")
+     */
+    private $categories;
+
+    /**
      * User constructor.
      */
     public function __construct()

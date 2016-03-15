@@ -18,6 +18,11 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('label', TextType::class, array('label' => 'Libellé'))
+            ->add('user', EntityType::class , array(
+                'label'      => 'Sélectionner un utilisateur',
+                'class'      => 'CoreBundle\Entity\User',
+                'attr'       => array('class' => 'custom-select'),
+            ))
         ;
     }
     

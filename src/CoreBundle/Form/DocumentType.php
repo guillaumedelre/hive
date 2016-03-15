@@ -25,6 +25,7 @@ class DocumentType extends AbstractType
             ->add('user', EntityType::class , array(
                 'label'      => 'Sélectionner un utilisateur',
                 'class'      => 'CoreBundle\Entity\User',
+                'attr'       => array('class' => 'custom-select'),
             ))
             ->add('category', EntityType::class , array(
                 'label'      => 'Sélectionner une catégorie',

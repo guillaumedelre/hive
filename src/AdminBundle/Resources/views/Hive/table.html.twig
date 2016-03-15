@@ -11,7 +11,9 @@
     <tbody>
     {% for hive in hives %}
         <tr>
-            <td>{{ hive.label }}</td>
+            <td>
+                <a href="{{ url('app_default_index', {"hiveSlug": hive.slug}) }}" target="_blank" class="btn btn-link">{{ hive.label }}</a>
+            </td>
             <td>{{ hive.users|length }}</td>
             <td>{{ hive.updatedAt|date }}</td>
             <td>

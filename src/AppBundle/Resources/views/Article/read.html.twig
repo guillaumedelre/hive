@@ -1,0 +1,31 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li>
+            <a href="{{ url('app_article_index', {'hiveSlug': me.hive.slug}) }}">Articles</a>
+        </li>
+        <li class="active">{{ article.title }}</li>
+    </ol>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            {{ include("AppBundle:Article:categories.html.twig") }}
+        </div>
+
+        <div class="col-md-10">
+            <h3 class="dashhead-title">{{ article.title }}</h3>
+            <blockquote>
+                <p>{{ article.description|nl2br }}</p>
+                <footer>
+                    <span class="label label-primary">{{ article.category }}</span> <cite title="Auteur">{{ article.author.firstname|capitalize }} {{ article.author.lastname|capitalize}}</cite>, le {{ article.updatedAt|date('d/m/Y') }} </footer>
+            </blockquote>
+        </div>
+    </div>
+    {% endblock %}

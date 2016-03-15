@@ -1,0 +1,5 @@
+<ul class="nav nav-pills nav-stacked">
+    {% for category in categories %}
+        <li {% if currentCategory is defined and category.id == currentCategory.id %}class="active"{% endif %}><a href="{{ url('app_article_by_category', {'hiveSlug': me.hive.slug, 'categorySlug': category.slug}) }}">{{ category.label }}</a></li>
+    {% endfor %}
+</ul>

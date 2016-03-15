@@ -1,4 +1,7 @@
 parameters:
+    # me classe
+    core.service.me.class: CoreBundle\Service\MeService
+
     # form types
     core.form.type.article.class: CoreBundle\Form\ArticleType
     core.form.type.category.class: CoreBundle\Form\CategoryType
@@ -119,3 +122,8 @@ services:
         parent: core.form.handler.abstract
         calls:
             - [ setFormType, [%core.form.type.vote.class%] ]
+
+    # me service
+    core.service.me:
+        class: %core.service.me.class%
+        arguments: ["@core.repository.user", "@security.token_storage", "@router"]

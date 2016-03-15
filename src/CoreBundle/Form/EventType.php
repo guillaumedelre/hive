@@ -21,6 +21,7 @@ class EventType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, array(
                 'label' => 'Sélectionner un type',
+                'attr'       => array('class' => 'custom-select'),
                 'choices' => [
                     'Evénement' => EventRepository::TYPE_EVENT,
                     'Sondage'  => EventRepository::TYPE_VOTE,

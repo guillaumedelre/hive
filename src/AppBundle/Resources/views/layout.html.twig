@@ -1,11 +1,25 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+    <link href="{{ asset('bower_components/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+    {% if app.user and "root" != app.user.username %}
+        <link href="{{ asset('bundles/app/css/responsive-calendar-' ~ app.user.theme ~ '.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/app/css/toolkit-' ~ app.user.theme ~ '.css') }}" rel="stylesheet">
+    {% else %}
+        <link href="{{ asset('bundles/app/css/responsive-calendar-' ~ currentTheme.default ~ '.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/app/css/toolkit-' ~ currentTheme.default ~ '.css') }}" rel="stylesheet">
+    {% endif %}
+    <link href="{{ asset('bundles/app/css/application.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block header %}
-    {% include "AdminBundle:Common:header.html.twig" %}
+    {% include "AppBundle:Common:header.html.twig" %}
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         {% for type, flashes in app.session.flashbag.all %}
             {% for flash in flashes %}
                 <div class="alert alert-{{ type }}" role="alert">
@@ -17,11 +31,18 @@
             {% endfor %}
         {% endfor %}
     </div>
-    {% include "AdminBundle:Common:page-header.html.twig" %}
+    {% include "AppBundle:Common:page-header.html.twig" %}
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset("bundles/admin/js/custom.js") }}"></script>
+    <script src="{{ asset("bower_components/jquery/dist/jquery.min.js") }}"></script>
+    <script src="{{ asset("bower_components/tether/dist/js/tether.min.js") }}"></script>
+    <script src="{{ asset("bower_components/bootstrap/dist/js/bootstrap.min.js") }}"></script>
+    <script src="{{ asset("bower_components/tablesorter/jquery.tablesorter.min.js") }}"></script>
+    <script src="{{ asset("bundles/app/js/responsive-calendar.js") }}"></script>
+    <script src="{{ asset("bundles/app/js/chart.js") }}"></script>
+    <script src="{{ asset("bundles/app/js/toolkit.js") }}"></script>
+    <script src="{{ asset("bundles/app/js/application.js") }}"></script>
+    <script src="{{ asset("bundles/app/js/custom.js") }}"></script>
 {% endblock %}
 

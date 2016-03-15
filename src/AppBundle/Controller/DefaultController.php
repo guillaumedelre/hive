@@ -8,10 +8,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/{hiveSlug}", name="app_default_index")
      */
-    public function indexAction()
+    public function indexAction($hiveSlug)
     {
-        return $this->render('AppBundle:Default:index.html.twig');
+        $data = array(
+            'pageTitle' => 'Tableau de bord',
+            'me'        => $this->get('core.service.me')->getUser(),
+        );
+
+        return $this->render('AppBundle:Default:index.html.twig', $data);
     }
 }

@@ -15,12 +15,6 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * @ORM\Entity(repositoryClass="CoreBundle\Entity\Repository\CategoryRepository")
  * @Serializer\XmlRoot("category")
  * @Hateoas\Relation("self", href = "expr('/api/categories/' ~ object.getId())")
- * @Hateoas\Relation(
- *     "parent",
- *     href = "expr('/api/categories/' ~ object.getParent().getId())",
- *     embedded = "expr(object.getParent())",
- *     exclusion = @Hateoas\Exclusion(excludeIf = "expr(object.getParent() === null)")
- * )
  */
 class Category extends AbstractEntity
 {
@@ -77,6 +71,16 @@ class Category extends AbstractEntity
      * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
      */
     private $articles;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="events", fetch="EAGER"))
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
 
     /**
      * @return string
@@ -267,4 +271,29 @@ class Category extends AbstractEntity
     {
         return $this->articles;
     }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set user
+     *
+     * @param User $user
+     *
+     * @return Category
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }

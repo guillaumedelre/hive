@@ -26,6 +26,7 @@ class UserType extends AbstractType
             ->add('isActive', CheckboxType::class, array('label' => 'Activé'))
             ->add('theme', ChoiceType::class, array(
                 'label' => 'Sélectionner un thème',
+                'attr'       => array('class' => 'custom-select'),
                 'choices' => [
                     'Clair'  => 'light',
                     'Sombre' => 'inverse',
@@ -42,6 +43,7 @@ class UserType extends AbstractType
             ->add('hive', EntityType::class , array(
                 'label'      => 'Sélectionner une ruche',
                 'class'      => 'CoreBundle\Entity\Hive',
+                'attr'       => array('class' => 'custom-select'),
             ))
         ;
     }
