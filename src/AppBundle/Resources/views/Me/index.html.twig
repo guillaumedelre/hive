@@ -1,0 +1,20 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="active">Mon profil</li>
+        </ol>
+    </div>
+
+    <div class="container-fluid">
+        <div class="table-full">
+            <div class="table-responsive">
+                {{ include("AppBundle:Me:form.html.twig") }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

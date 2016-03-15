@@ -8,6 +8,7 @@ parameters:
     core.form.type.document.class: CoreBundle\Form\DocumentType
     core.form.type.event.class: CoreBundle\Form\EventType
     core.form.type.hive.class: CoreBundle\Form\HiveType
+    core.form.type.me.class: CoreBundle\Form\MeType
     core.form.type.user.class: CoreBundle\Form\UserType
     core.form.type.vote.class: CoreBundle\Form\VoteType
 
@@ -18,6 +19,7 @@ parameters:
     core.form.handler.document.class: CoreBundle\Form\Handler\DocumentHandler
     core.form.handler.event.class: CoreBundle\Form\Handler\EventHandler
     core.form.handler.hive.class: CoreBundle\Form\Handler\HiveHandler
+    core.form.handler.me.class: CoreBundle\Form\Handler\MeHandler
     core.form.handler.user.class: CoreBundle\Form\Handler\UserHandler
     core.form.handler.vote.class: CoreBundle\Form\Handler\VoteHandler
 
@@ -112,6 +114,11 @@ services:
         parent: core.form.handler.abstract
         calls:
             - [ setFormType, [%core.form.type.hive.class%] ]
+    core.form.handler.me:
+        class: %core.form.handler.me.class%
+        parent: core.form.handler.abstract
+        calls:
+            - [ setFormType, [%core.form.type.me.class%] ]
     core.form.handler.user:
         class: %core.form.handler.user.class%
         parent: core.form.handler.abstract
