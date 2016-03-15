@@ -52,6 +52,13 @@ class Document extends AbstractEntity
     /**
      * @var string
      *
+     * @ORM\Column(name="mime_type", type="string", length=255, nullable=true)
+     */
+    private $mimeType;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
@@ -199,6 +206,30 @@ class Document extends AbstractEntity
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Get mimeType
+     *
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    /**
+     * Set mimType
+     *
+     * @param string $mimeType
+     *
+     * @return Document
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mimeType = $mimeType;
+
+        return $this;
     }
 
     /**

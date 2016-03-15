@@ -67,7 +67,7 @@ class ArticleController extends Controller
                 }
             }
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Article #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "Article #$id introuvable.");
             return $this->redirectToRoute('admin_article_index');
         }
 
@@ -93,7 +93,7 @@ class ArticleController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->get('session')->getFlashBag()->add('info', 'l\'article a bien été supprimé.');
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Article #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "Article #$id introuvable.");
         }
 
         return $this->redirectToRoute('admin_article_index');

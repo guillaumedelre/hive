@@ -15,7 +15,7 @@
                 <a href="{{ url('app_default_index', {"hiveSlug": hive.slug}) }}" target="_blank" class="btn btn-link">{{ hive.label }}</a>
             </td>
             <td>{{ hive.users|length }}</td>
-            <td>{{ hive.updatedAt|date }}</td>
+            <td>{{ hive.updatedAt|date('d/m/Y') }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
                     <a href="{{ url('admin_hive_edit', {id: hive.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Editer</a>

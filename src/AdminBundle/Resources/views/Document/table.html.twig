@@ -17,7 +17,7 @@
             <td>{{ document.category }}</td>
             <td>{{ document.user }}</td>
             <td>{{ document.size }}</td>
-            <td>{{ document.updatedAt|date }}</td>
+            <td>{{ document.updatedAt|date('d/m/Y') }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
                     <a href="{{ asset(document.path) }}" target="_blank" class="btn btn btn-primary-outline"><i class="fa fa-download"></i> Télécharger</a>

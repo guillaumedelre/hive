@@ -67,7 +67,7 @@ class DocumentController extends Controller
                 }
             }
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Document #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "Le document #id est introuvable");
             return $this->redirectToRoute('admin_document_index');
         }
 
@@ -94,7 +94,7 @@ class DocumentController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->get('session')->getFlashBag()->add('info', 'Le document a bien été supprimé.');
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Document #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "Le document #id est introuvable");
         }
 
         return $this->redirectToRoute('admin_document_index');

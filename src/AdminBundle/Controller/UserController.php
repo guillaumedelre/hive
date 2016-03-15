@@ -72,7 +72,7 @@ class UserController extends Controller
                 }
             }
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "User #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "L'utilistateur #$id est introuvable");
             return $this->redirectToRoute('admin_user_index');
         }
 
@@ -100,7 +100,7 @@ class UserController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->get('session')->getFlashBag()->add('info', 'L\'utilisateur a bien été supprimé.');
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "User #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "L'utilistateur #$id est introuvable");
         }
 
         return $this->redirectToRoute('admin_user_index');

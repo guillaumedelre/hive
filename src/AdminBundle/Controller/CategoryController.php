@@ -67,7 +67,7 @@ class CategoryController extends Controller
                 }
             }
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Category #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "Catégorie #$id introuvable");
             return $this->redirectToRoute('admin_category_index');
         }
 
@@ -93,7 +93,7 @@ class CategoryController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->get('session')->getFlashBag()->add('info', 'La catégorie a bien été supprimée.');
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Category #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "Catégorie #$id introuvable");
         }
 
         return $this->redirectToRoute('admin_category_index');

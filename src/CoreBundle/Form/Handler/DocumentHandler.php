@@ -37,6 +37,7 @@ class DocumentHandler extends AbstractFormHandler
 
         $filename   = $entity->getFile()->getClientOriginalName();
         $entity->getFile()->move($entity->getUploadDir(), $filename);
+        $entity->setMimeType($entity->getFile()->getClientMimeType());
         $entity->setSize($entity->getFile()->getClientSize());
         $entity->setPath($entity->getUploadDir() .$filename);
 

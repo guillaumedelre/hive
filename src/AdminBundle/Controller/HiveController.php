@@ -71,7 +71,7 @@ class HiveController extends Controller
                 }
             }
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Hive #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "La ruche #$id est introuvable");
             return $this->redirectToRoute('admin_hive_index');
         }
 
@@ -99,7 +99,7 @@ class HiveController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->get('session')->getFlashBag()->add('info', 'La ruche a bien été supprimée.');
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Hive #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "La ruche #$id est introuvable");
         }
 
         return $this->redirectToRoute('admin_hive_index');

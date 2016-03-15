@@ -14,10 +14,10 @@
     {% for event in events %}
         <tr>
             <td>{{ event.title }}</td>
-            <td>{{ event.startAt|date }}</td>
-            <td>{{ event.endAt|date }}</td>
+            <td>{{ event.startAt|date('d/m/Y') }}</td>
+            <td>{{ event.endAt|date('d/m/Y') }}</td>
             <td>{{ event.type|capitalize }}</td>
-            <td>{{ event.updatedAt|date }}</td>
+            <td>{{ event.updatedAt|date('d/m/Y') }}</td>
             <td>
                 <div class="pull-right btn-group btn-group-sm" role="group" aria-label="Action buttons">
                     <a href="{{ url('admin_event_edit', {id: event.id}) }}" class="btn btn btn-info-outline"><i class="fa fa-edit"></i> Editer</a>

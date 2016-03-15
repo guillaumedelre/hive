@@ -67,7 +67,7 @@ class EventController extends Controller
                 }
             }
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Event #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "L'événement #id est introuvable");
             return $this->redirectToRoute('admin_event_index');
         }
 
@@ -93,7 +93,7 @@ class EventController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->get('session')->getFlashBag()->add('info', 'L\'événement a bien été supprimé.');
         } else {
-            $this->get('session')->getFlashBag()->add('danger', "Event #$id not found");
+            $this->get('session')->getFlashBag()->add('danger', "L'événement #id est introuvable");
         }
 
         return $this->redirectToRoute('admin_event_index');
