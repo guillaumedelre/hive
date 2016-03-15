@@ -183,7 +183,13 @@ class User extends AbstractEntity implements UserInterface
      */
     public function __construct()
     {
-        $this->isActive = true;
+        $this->documents  = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->events     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->votes      = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->articles   = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $this->isActive   = true;
     }
 
     /**
@@ -728,5 +734,15 @@ class User extends AbstractEntity implements UserInterface
     public function getDocuments()
     {
         return $this->documents;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return ArrayCollection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

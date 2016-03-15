@@ -75,7 +75,7 @@ class Category extends AbstractEntity
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="events", fetch="EAGER"))
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="categories", fetch="EAGER"))
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
