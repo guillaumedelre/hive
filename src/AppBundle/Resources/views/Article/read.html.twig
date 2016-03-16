@@ -24,7 +24,8 @@
             <blockquote>
                 <p>{{ article.description|nl2br }}</p>
                 <footer>
-                    <span class="label label-primary">{{ article.category }}</span> <cite title="Auteur">{{ document.user.fullname|capitalize }}</cite>, le {{ article.updatedAt|date('d/m/Y') }} </footer>
+                    <span class="label label-primary">{{ article.category }}</span> <cite title="Auteur">{{ article.author.fullname|capitalize }}</cite>, le {{ article.updatedAt|date('d/m/Y') }}
+                </footer>
             </blockquote>
         </div>
     </div>

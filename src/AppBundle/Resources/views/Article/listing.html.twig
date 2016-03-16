@@ -5,7 +5,7 @@
         </h3>
         <p>{{ article.description[0:255]|nl2br }}...</p>
         <footer>
-            <span class="label label-primary">{{ article.category|capitalize }}</span> <cite title="Auteur">{{ document.user.fullname }}</cite>, le {{ article.updatedAt|date('d/m/Y') }}
+            <span class="label label-primary">{{ article.category|capitalize }}</span> <cite title="Auteur">{{ article.author.fullname }}</cite>, le {{ article.updatedAt|date('d/m/Y') }}
         </footer>
     </blockquote>
 {% endfor %}

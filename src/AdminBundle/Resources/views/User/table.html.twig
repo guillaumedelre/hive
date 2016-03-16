@@ -2,7 +2,7 @@
     <caption>Total : {{ users|length }}</caption>
     <thead>
     <tr>
-        <th>Utilisateur</th>
+        <th colspan="2">Utilisateur</th>
         <th>Articles</th>
         <th>Documents</th>
         <th>Evénements</th>
@@ -15,7 +15,8 @@
     <tbody>
     {% for user in users %}
         <tr>
-            <td>{{ user.username }}</td>
+            <td>{{ user.fullname }}</td>
+            <td>({{ user.username }})</td>
             <td>{{ user.articles|length }}</td>
             <td>{{ user.documents|length }}</td>
             <td>{{ user.events|length }}</td>
