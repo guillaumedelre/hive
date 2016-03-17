@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,11 +15,12 @@ class VoteController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $limit = $request->query->get('limit') ? $request->query->get('limit') : 20;
-        $offset = $request->query->get('offset') ? $request->query->get('offset') : 0;
+        $limit = $request->query->get('limit', AbstractEntity::DEFAULT_LIMIT_ADMIN);
+        $offset = $request->query->get('offset', 0);
 
         $data = array(
             'currentPage' => $offset,
+            'currentLimit' => $limit,
             'totalPages'  => ceil(count($this->get('core.repository.event')->findAll()) / $limit),
             "currentEvents"  => $this->get('core.repository.event')->getCurrentVoteEvents(),
             "finishedEvents"  => $this->get('core.repository.event')->getFinishedVoteEvents(),

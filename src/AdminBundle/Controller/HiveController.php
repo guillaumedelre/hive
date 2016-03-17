@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\Hive;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,8 +17,8 @@ class HiveController extends Controller
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'avez pas les droits suffisant pour accéder à cette page!');
 
-        $limit = $request->query->get('limit') ? $request->query->get('limit') : 20;
-        $offset = $request->query->get('offset') ? $request->query->get('offset') : 0;
+        $limit = $request->query->get('limit', AbstractEntity::DEFAULT_LIMIT_ADMIN);
+        $offset = $request->query->get('offset', 0);
 
         $entity = new Hive();
 
@@ -36,8 +37,9 @@ class HiveController extends Controller
 
         $data = array(
             'currentPage' => $offset,
+            'currentLimit' => $limit,
             'totalPages'  => ceil(count($this->get('core.repository.hive')->findAll()) / $limit),
-            "hives"  => $this->get('core.repository.hive')->findBy([], ['updatedAt' => 'DESC']),
+            "hives"  => $this->get('core.repository.hive')->findBy([], ['updatedAt' => 'DESC'], $limit, $offset * $limit),
             "form"        => $this->get('core.form.handler.hive')->getForm()->createView(),
             'pageTitle'   => 'Ruches',
         );

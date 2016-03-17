@@ -12,7 +12,7 @@
     <tbody>
     {% for article in articles %}
         <tr>
-            <td>{{ article.title }}</td>
+            <td>{{ article.title|capitalize }}</td>
             <td>{{ article.author.fullname }}</td>
             <td>{{ article.category }}</td>
             <td>{{ article.updatedAt|date('d/m/Y') }}</td>

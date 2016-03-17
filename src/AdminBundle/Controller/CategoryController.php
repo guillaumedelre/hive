@@ -2,6 +2,7 @@
 
 namespace AdminBundle\Controller;
 
+use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,8 +15,8 @@ class CategoryController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $limit = $request->query->get('limit') ? $request->query->get('limit') : 20;
-        $offset = $request->query->get('offset') ? $request->query->get('offset') : 0;
+        $limit = $request->query->get('limit', AbstractEntity::DEFAULT_LIMIT_ADMIN);
+        $offset = $request->query->get('offset', 0);
 
         $entity = new Category();
 
@@ -34,8 +35,9 @@ class CategoryController extends Controller
 
         $data = array(
             'currentPage' => $offset,
+            'currentLimit' => $limit,
             'totalPages'  => ceil(count($this->get('core.repository.category')->findAll()) / $limit),
-            "categories"  => $this->get('core.repository.category')->findBy([], ['updatedAt' => 'DESC']),
+            "categories"  => $this->get('core.repository.category')->findBy([], ['updatedAt' => 'DESC'], $limit, $offset * $limit),
             "form"        => $this->get('core.form.handler.category')->getForm()->createView(),
             'pageTitle'   => 'Catégories',
         );
