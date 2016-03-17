@@ -25,7 +25,7 @@ class EventController extends Controller
         if ('POST' === $request->getMethod()) {
             try {
                 $this->get('core.form.handler.event')->process($request, $entity);
-                $this->get('session')->getFlashBag()->add('success', 'a b.');
+                $this->get('session')->getFlashBag()->add('success', 'L\'événement a bien été enregistré.');
             } catch (\Exception $e) {
                 $this->get('session')->getFlashBag()->add('danger', $e->getMessage());
             }
