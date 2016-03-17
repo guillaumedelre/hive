@@ -17,6 +17,25 @@ class EventRepository extends AbstractRepository
     const TYPE_VOTE  = 'vote';
     const TYPE_EVENT = 'event';
 
+    public function getMonthEvents()
+    {
+        $firstDayOfMonth = date('d/m/Y ',(strtotime('first day of this month')));
+        $lastDayOfMonth  = date('d/m/Y ',(strtotime('last day of this month')));
+
+        return $this->createQueryBuilder('e')
+            ->where('e.type = :type')
+            ->andWhere('e.startAt <= :monthStart')
+            ->andWhere('e.endAt >= :monthEnd')
+            ->setParameters(array(
+                'type' => self::TYPE_EVENT,
+                'monthStart' => $firstDayOfMonth,
+                'monthEnd' => $lastDayOfMonth,
+            ))
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /**
      * @return Event[]
      */

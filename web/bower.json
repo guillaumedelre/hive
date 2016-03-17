@@ -6,6 +6,8 @@
     "tether": "latest",
     "holderjs": "latest",
     "tablesorter": "latest",
-    "bootstrap": "latest"
+    "bootstrap": "^3",
+    "underscore": "lastest",
+    "bootstrap-calendar": "^0"
   }
 }

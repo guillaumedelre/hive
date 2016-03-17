@@ -1,0 +1,81 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="active">Evénements</li>
+        </ol>
+    </div>
+
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="pull-right form-inline">
+                <div class="btn-group">
+                    <button class="btn btn-primary-outline" data-calendar-nav="prev"><< Précédent</button>
+                    <button class="btn btn-default-outline" data-calendar-nav="today">Aujourd'hui</button>
+                    <button class="btn btn-primary-outline" data-calendar-nav="next">Suivant >></button>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" data-calendar-view="year">Année</button>
+                    <button class="btn btn-primary active" data-calendar-view="month">Mois</button>
+                    <button class="btn btn-primary" data-calendar-view="week">Semaine</button>
+                    <button class="btn btn-primary" data-calendar-view="day">Jour</button>
+                </div>
+            </div>
+
+            <h3></h3>
+            <small>To see example with events navigate to march 2013</small>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <select id="first_day" class="form-control hide">
+                        <option value="" >First day of week language-dependant</option>
+                        <option value="2">First day of week is Sunday</option>
+                        <option value="1" selected="selected">First day of week is Monday</option>
+                    </select>
+                    <select id="language" class="form-control hide">
+                        <option value="">Select Language (default: en-US)</option>
+                        <option value="bg-BG">Bulgarian</option>
+                        <option value="nl-NL">Dutch</option>
+                        <option value="fr-FR" selected="selected">French</option>
+                        <option value="de-DE">German</option>
+                        <option value="el-GR">Greek</option>
+                        <option value="hu-HU">Hungarian</option>
+                        <option value="id-ID">Bahasa Indonesia</option>
+                        <option value="it-IT">Italian</option>
+                        <option value="pl-PL">Polish</option>
+                        <option value="pt-BR">Portuguese (Brazil)</option>
+                        <option value="ro-RO">Romania</option>
+                        <option value="es-CO">Spanish (Colombia)</option>
+                        <option value="es-MX">Spanish (Mexico)</option>
+                        <option value="es-ES">Spanish (Spain)</option>
+                        <option value="ru-RU">Russian</option>
+                        <option value="sk-SR">Slovak</option>
+                        <option value="sv-SE">Swedish</option>
+                        <option value="ko-KR">Korean</option>
+                        <option value="zh-TW">繁體中文</option>
+                        <option value="th-TH">Thai (Thailand)</option>
+                    </select>
+                    <label class="checkbox hide">
+                        <input type="checkbox" id="show_wb" checked> Show week box
+                    </label>
+                    <label class="checkbox hide">
+                        <input type="checkbox" id="show_wbn" checked> Show week box number
+                    </label>
+                </div>
+
+                <h4>Evénements</h4>
+                <ul id="eventlist" class="nav nav-list"></ul>
+            </div>
+            <div class="col-md-9">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
