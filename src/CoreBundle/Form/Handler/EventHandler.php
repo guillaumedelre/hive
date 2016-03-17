@@ -14,19 +14,4 @@ use Symfony\Component\HttpFoundation\Request;
 
 class EventHandler extends AbstractFormHandler
 {
-    /**
-     * @param Request $request
-     * @param Event $entity
-     * @return bool
-     */
-    public function process(Request $request, $entity)
-    {
-        $username = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
-
-        $user = $this->container->get('core.repository.user')->findOneByUsername($username);
-
-        $entity->setUser($user);
-
-        return parent::process($request, $entity);
-    }
 }

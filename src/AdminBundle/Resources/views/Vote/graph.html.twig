@@ -1,6 +1,6 @@
     <div class="w-sm m-x-auto">
-        <h3>{{ event.title }}</h3>
-        <p>{{ event.description }}</p>
+        <h3>{{ event.title|capitalize }}</h3>
+        <p>{{ event.description|slice(0, 255) }}...</p>
         <canvas
                 class="ex-graph"
                 width="200" height="200"

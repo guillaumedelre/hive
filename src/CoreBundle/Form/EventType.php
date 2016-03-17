@@ -3,8 +3,11 @@
 namespace CoreBundle\Form;
 
 use CoreBundle\Entity\Repository\EventRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,14 +30,23 @@ class EventType extends AbstractType
                     'Sondage'  => EventRepository::TYPE_VOTE,
                 ],
             ))
+            ->add('user', EntityType::class , array(
+                'label'      => 'Sélectionner un utilisateur',
+                'class'      => 'CoreBundle\Entity\User',
+                'attr'       => array('class' => 'custom-select'),
+            ))
             ->add('title', TextType::class, array('label' => 'Titre'))
             ->add('description', TextareaType::class, array('label' => 'Description'))
-            ->add('startAt', TextType::class, array(
-                'attr'  => array('data-provide' => "datepicker"),
-                'label' => 'Début'
+            ->add('startAt', DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'attr'   => array('data-provide' => "datepicker", 'data-date-format' => 'dd/mm/yyyy'),
+                'label'  => 'Début'
             ))
-            ->add('endAt', TextType::class, array(
-                'attr'  => array('data-provide' => "datepicker"),
+            ->add('endAt', DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'attr'  => array('data-provide' => "datepicker", 'data-date-format' => 'dd/mm/yyyy'),
                 'label' => 'Fin',
             ))
         ;
