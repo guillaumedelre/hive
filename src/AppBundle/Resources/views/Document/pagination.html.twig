@@ -2,7 +2,7 @@
 <ul class="pagination">
     {% if currentPage > 0 %}
         <li>
-            <a href="{{ url("app_article_index", {'hiveSlug': me.hive.slug, 'offset': currentPage - 1 }) }}" aria-label="Previous">
+            <a href="{{ url("app_document_index", {'hiveSlug': me.hive.slug, 'offset': currentPage - 1, 'limit': currentLimit}) }}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
@@ -10,13 +10,13 @@
 
     {% for page in 0..totalPages - 1 %}
         <li {% if page == currentPage %}class="active"{% endif %}>
-            <a href="{{ url("app_article_index", {'hiveSlug': me.hive.slug, 'offset': page}) }}">{{ page + 1 }}</a>
+            <a href="{{ url("app_document_index", {'hiveSlug': me.hive.slug, 'offset': page, 'limit': currentLimit}) }}">{{ page + 1 }}</a>
         </li>
     {% endfor %}
 
     {% if currentPage < totalPages - 1 %}
         <li>
-            <a href="{{ url("app_article_index", {'hiveSlug': me.hive.slug, 'offset': currentPage + 1}) }}" aria-label="Next">
+            <a href="{{ url("app_document_index", {'hiveSlug': me.hive.slug, 'offset': currentPage + 1, 'limit': currentLimit}) }}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

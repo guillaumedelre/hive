@@ -24,7 +24,8 @@ class DocumentController extends Controller
      */
     public function indexAction(Request $request, $hiveSlug)
     {
-        $page = $request->query->get('offset') ? $request->query->get('offset') : 0;
+        $limit = $request->query->get('limit', AbstractEntity::DEFAULT_LIMIT_APP);
+        $page  = $request->query->get('offset', 0);
 
         /** @var User $me */
         $me = $this->get('core.service.me')->getUser();
@@ -35,14 +36,15 @@ class DocumentController extends Controller
             return $this->redirectToRoute('app_default_index', ['hiveSlug' => $me->getHive()->getSlug()]);
         }
 
-        $documents = $this->get('core.repository.document')->getByHive($me->getHive(), $page);
+        $documents = $this->get('core.repository.document')->getByHive($me->getHive(), $page * $limit);
 
         $categories = $this->get('core.repository.category')->getAllByHive($me->getHive());
 
         $data = array(
             'currentPage' => $page,
+            'currentLimit' => $limit,
             'pageTitle'   => 'Documents',
-            'totalPages'  => ceil(count($this->get('core.repository.document')->getAllByHive($me->getHive())) / 5),
+            'totalPages'  => ceil(count($this->get('core.repository.document')->getAllByHive($me->getHive())) / AbstractEntity::DEFAULT_LIMIT_APP),
             'me'          => $this->get('core.service.me')->getUser(),
             'documents'    => $documents,
             'categories'  => $categories,
@@ -56,7 +58,8 @@ class DocumentController extends Controller
      */
     public function byCategoryAction(Request $request, $hiveSlug, $categorySlug)
     {
-        $page = $request->query->get('offset') ? $request->query->get('offset') : 0;
+        $limit = $request->query->get('limit', AbstractEntity::DEFAULT_LIMIT_APP);
+        $page  = $request->query->get('offset', 0);
 
         /** @var User $me */
         $me = $this->get('core.service.me')->getUser();
@@ -75,12 +78,13 @@ class DocumentController extends Controller
             return $this->redirectToRoute('app_default_index', ['hiveSlug' => $me->getHive()->getSlug()]);
         }
 
-        $documents = $this->get('core.repository.document')->getByHiveAndCategory($me->getHive(), $category, $page);
+        $documents = $this->get('core.repository.document')->getByHiveAndCategory($me->getHive(), $category, $page * $limit);
 
         $categories = $this->get('core.repository.category')->getAllByHive($me->getHive());
 
         $data = array(
-            'currentPage'     => $page,
+            'currentPage' => $page,
+            'currentLimit' => $limit,
             'pageTitle'       => 'Documents',
             'totalPages'      => ceil(count($this->get('core.repository.document')->getAllByHiveAndCategory($me->getHive(), $category)) / AbstractEntity::DEFAULT_LIMIT_APP),
             'me'              => $this->get('core.service.me')->getUser(),

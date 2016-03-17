@@ -11,7 +11,6 @@ namespace AppBundle\Controller;
 
 use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\Article;
-use CoreBundle\Entity\Hive;
 use CoreBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,7 +23,8 @@ class ArticleController extends Controller
      */
     public function indexAction(Request $request, $hiveSlug)
     {
-        $page = $request->query->get('offset') ? $request->query->get('offset') : 0;
+        $limit = $request->query->get('limit', AbstractEntity::DEFAULT_LIMIT_APP);
+        $page  = $request->query->get('offset', 0);
 
         /** @var User $me */
         $me = $this->get('core.service.me')->getUser();
@@ -35,14 +35,15 @@ class ArticleController extends Controller
             return $this->redirectToRoute('app_default_index', ['hiveSlug' => $me->getHive()->getSlug()]);
         }
 
-        $articles = $this->get('core.repository.article')->getByHive($me->getHive(), $page);
+        $articles = $this->get('core.repository.article')->getByHive($me->getHive(), $page * $limit);
 
         $categories = $this->get('core.repository.category')->getAllByHive($me->getHive());
 
         $data = array(
             'currentPage' => $page,
+            'currentLimit' => $limit,
             'pageTitle'   => 'Articles',
-            'totalPages'  => ceil(count($this->get('core.repository.article')->getAllByHive($me->getHive())) / 5),
+            'totalPages'  => ceil(count($this->get('core.repository.article')->getAllByHive($me->getHive())) / AbstractEntity::DEFAULT_LIMIT_APP),
             'me'          => $this->get('core.service.me')->getUser(),
             'articles'    => $articles,
             'categories'  => $categories,
