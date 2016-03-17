@@ -92,7 +92,8 @@ class ArticleController extends Controller
      */
     public function byCategoryAction(Request $request, $hiveSlug, $categorySlug)
     {
-        $page = $request->query->get('offset') ? $request->query->get('offset') : 0;
+        $limit = $request->query->get('limit', AbstractEntity::DEFAULT_LIMIT_APP);
+        $page  = $request->query->get('offset', 0);
 
         /** @var User $me */
         $me = $this->get('core.service.me')->getUser();
@@ -116,7 +117,8 @@ class ArticleController extends Controller
         $categories = $this->get('core.repository.category')->getAllByHive($me->getHive());
 
         $data = array(
-            'currentPage'     => $page,
+            'currentPage' => $page,
+            'currentLimit' => $limit,
             'pageTitle'       => 'Articles',
             'totalPages'      => ceil(count($this->get('core.repository.article')->getAllByHiveAndCategory($me->getHive(), $category)) / AbstractEntity::DEFAULT_LIMIT_APP),
             'me'              => $this->get('core.service.me')->getUser(),

@@ -11,8 +11,8 @@ namespace CoreBundle\Entity;
 
 abstract class AbstractEntity
 {
-    const DEFAULT_LIMIT_APP   = 5;
-    const DEFAULT_LIMIT_ADMIN = 10;
+    const DEFAULT_LIMIT_APP   = 10;
+    const DEFAULT_LIMIT_ADMIN = 20;
 
     abstract public function __toString();
 }

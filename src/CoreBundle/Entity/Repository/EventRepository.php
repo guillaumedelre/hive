@@ -9,6 +9,7 @@
 namespace CoreBundle\Entity\Repository;
 
 
+use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\Event;
 
 class EventRepository extends AbstractRepository
@@ -19,7 +20,26 @@ class EventRepository extends AbstractRepository
     /**
      * @return Event[]
      */
-    public function getFinishedVoteEvents()
+    public function getFinishedVoteEvents($offset)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.type = :type')
+            ->andWhere('e.endAt < :endAt')
+            ->setParameters(array(
+                'type' => self::TYPE_VOTE,
+                'endAt' => new \DateTime(),
+            ))
+            ->setMaxResults(AbstractEntity::DEFAULT_LIMIT_APP)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Event[]
+     */
+    public function getAllFinishedVoteEvents()
     {
         return $this->createQueryBuilder('e')
             ->where('e.type = :type')
@@ -36,7 +56,27 @@ class EventRepository extends AbstractRepository
     /**
      * @return Event[]
      */
-    public function getCurrentVoteEvents()
+    public function getCurrentVoteEvents($offset)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.type = :type')
+            ->andWhere('e.startAt <= :now')
+            ->andWhere('e.endAt >= :now')
+            ->setParameters(array(
+                'type' => self::TYPE_VOTE,
+                'now' => new \DateTime(),
+            ))
+            ->setMaxResults(AbstractEntity::DEFAULT_LIMIT_APP)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Event[]
+     */
+    public function getAllCurrentVoteEvents()
     {
         return $this->createQueryBuilder('e')
             ->where('e.type = :type')

@@ -1,0 +1,42 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="active">Articles</li>
+        </ol>
+    </div>
+
+    <div class="container-fluid">
+
+        <ul class="nav nav-bordered m-b-0">
+            <li {% if currentStatus == 'en cours'|slugify %}class="active"{% endif %}>
+                <a href="{{ url('app_vote_by_status', {'hiveSlug': me.hive.slug, 'status': 'en cours'|slugify}) }}">En cours</a>
+            </li>
+            <li {% if currentStatus == 'termine'|slugify %}class="active"{% endif %}>
+                <a href="{{ url('app_vote_by_status', {'hiveSlug': me.hive.slug, 'status': 'termine'|slugify}) }}">Terminé</a>
+            </li>
+        </ul>
+
+        <hr class="m-t-0 m-b-lg">
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" >
+                <div class="row m-t-md">
+                    {% for event in events %}
+                        {{ include("AppBundle:Vote:graph.html.twig") }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            {{ include("AppBundle:Vote:pagination.html.twig") }}
+        </div>
+
+    </div>
+
+{% endblock %}

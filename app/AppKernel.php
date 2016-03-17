@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
 
             new AppBundle\AppBundle(),
             new AdminBundle\AdminBundle(),

@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li {% if app.request.attributes.get('_route')|slice(0, 9) == 'app_vote_' %}class="active"{% endif %}>
-                    <a href="{#{ url("app_vote_index") }#}" title="Sondages" data-toggle="tooltip" data-placement="right" data-container="body">
+                    <a href="{{ url("app_vote_index", {'hiveSlug': me.hive.slug}) }}" title="Sondages" data-toggle="tooltip" data-placement="right" data-container="body">
                         <span class="icon icon-megaphone"></span>
                         <small class="iconav-nav-label visible-xs-block">Sondages</small>
                     </a>
