@@ -11,26 +11,36 @@ namespace CoreBundle\Entity\Repository;
 
 use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\Event;
+use FOS\RestBundle\Util\Codes;
 
 class EventRepository extends AbstractRepository
 {
     const TYPE_VOTE  = 'vote';
     const TYPE_EVENT = 'event';
 
-    public function getMonthEvents()
+    /**
+     * @param $from
+     * @param $to
+     * @return Event[]
+     */
+    public function getEventsBetween($from = null, $to = null, $limit, $offset)
     {
-        $firstDayOfMonth = date('d/m/Y ',(strtotime('first day of this month')));
-        $lastDayOfMonth  = date('d/m/Y ',(strtotime('last day of this month')));
+        if (null === $from || null === $to) {
+            throw new \Exception('Missing parameter', Codes::HTTP_BAD_REQUEST);
+        }
+
+        $from = \DateTime::createFromFormat('U ',$from);
+        $to   = \DateTime::createFromFormat('U ',$to);
 
         return $this->createQueryBuilder('e')
-            ->where('e.type = :type')
-            ->andWhere('e.startAt <= :monthStart')
-            ->andWhere('e.endAt >= :monthEnd')
+            ->where('e.startAt <= :from')
+            ->orWhere('e.endAt >= :to')
             ->setParameters(array(
-                'type' => self::TYPE_EVENT,
-                'monthStart' => $firstDayOfMonth,
-                'monthEnd' => $lastDayOfMonth,
+                'from'  => $from,
+                'to'    => $to,
             ))
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
             ->getQuery()
             ->getResult()
             ;

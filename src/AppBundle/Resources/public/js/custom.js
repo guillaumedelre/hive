@@ -3,8 +3,8 @@
     "use strict";
 
     var options = {
-        events_source: function () { return []; },
-        //events_source: '/api/events',
+        //events_source: function () { return []; },
+        events_source: '/api/events',
         view: 'month',
 
         tmpl_path: '/bower_components/bootstrap-calendar/tmpls/',
