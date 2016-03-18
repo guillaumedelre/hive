@@ -19,9 +19,12 @@ class EventRepository extends AbstractRepository
     const TYPE_EVENT = 'event';
 
     /**
-     * @param $from
-     * @param $to
-     * @return Event[]
+     * @param null $from
+     * @param null $to
+     * @param $limit
+     * @param $offset
+     * @return array
+     * @throws \Exception
      */
     public function getEventsBetween($from = null, $to = null, $limit, $offset)
     {
@@ -29,15 +32,16 @@ class EventRepository extends AbstractRepository
             throw new \Exception('Missing parameter', Codes::HTTP_BAD_REQUEST);
         }
 
-        $from = \DateTime::createFromFormat('U ',$from);
-        $to   = \DateTime::createFromFormat('U ',$to);
+        $from = (new \DateTime)->setTimestamp(substr($from, 0, 10));
+        $to   = (new \DateTime)->setTimestamp(substr($to, 0, 10));
 
         return $this->createQueryBuilder('e')
-            ->where('e.startAt <= :from')
-            ->orWhere('e.endAt >= :to')
+            ->where('e.startAt <= :from AND e.endAt >= :from AND e.endAt <= :to')
+            ->orWhere('e.startAt >= :from AND e.startAt <= :to AND e.endAt >= :to')
+            ->orWhere('e.startAt >= :from AND e.endAt <= :to')
             ->setParameters(array(
-                'from'  => $from,
-                'to'    => $to,
+                'from'  => $from->format('Y-m-d'),
+                'to'    => $to->format('Y-m-d'),
             ))
             ->setMaxResults($limit)
             ->setFirstResult($offset)
