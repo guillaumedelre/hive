@@ -41,12 +41,18 @@ class EventController extends FOSRestController implements ClassResourceInterfac
         $to      = $paramFetcher->get('to', null);
 
         $collection = $this->get('core.repository.event')->getEventsBetween($from, $to, $limit, $page * $limit);
+        $events = $this->get('api.factory.calendarevent')->createFromEvents($collection);
 
-        if(!is_array($collection)) {
+        if(!is_array($events)) {
             throw $this->createNotFoundException();
         }
 
-        return View::create($collection, Codes::HTTP_OK);
+        $output = [
+            "success" => 1,
+            "result"  => $events,
+        ];
+
+        return View::create($output, Codes::HTTP_OK);
     }
 
     /**
