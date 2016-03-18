@@ -7,7 +7,7 @@
     "holderjs": "latest",
     "tablesorter": "latest",
     "bootstrap": "^3",
-    "underscore": "lastest",
-    "bootstrap-calendar": "^0"
+    "underscore": "latest",
+    "bootstrap-calendar": "latest"
   }
 }
