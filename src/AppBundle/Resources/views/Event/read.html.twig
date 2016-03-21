@@ -1,0 +1,25 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    {{ parent() }}
+
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ url('app_event_index', {'hiveSlug': me.hive.slug}) }}">Evénements</a>
+            </li>
+            <li class="active">{{ event.title|capitalize }}</li>
+        </ol>
+    </div>
+
+    <div class="container-fluid">
+        <h3 class="dashhead-title">{{ event.title|capitalize }}</h3>
+        <blockquote>
+            <p>{{ event.description|nl2br }}</p>
+            <footer>
+                <cite title="Auteur">{{ event.user.fullname|capitalize }}</cite>, le {{ event.updatedAt|date('d/m/Y') }}
+            </footer>
+        </blockquote>
+    </div>
+{% endblock %}

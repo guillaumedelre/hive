@@ -53,7 +53,7 @@ class CalendarEventFactory
         $calEvent->setSlug($event->getSlug());
         $calEvent->setDescription($event->getDescription());
         $calEvent->setClass($class);
-        $calEvent->setUrl($this->router->getGenerator()->generate('app_default_index', ['hiveSlug' => $this->me->getUser()->getHive()->getSlug()]));
+        $calEvent->setUrl($this->router->getGenerator()->generate('app_event_read', ['hiveSlug' => $this->me->getUser()->getHive()->getSlug(), 'eventSlug' => $event->getSlug()]));
         $calEvent->setStart($event->getStartAt()->getTimestamp() * 1000);
         $calEvent->setEnd($event->getEndAt()->getTimestamp() * 1000);
 
