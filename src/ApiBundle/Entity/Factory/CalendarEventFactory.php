@@ -39,14 +39,33 @@ class CalendarEventFactory
      */
     public function createFromEvent(Event $event)
     {
-        switch($event->getType()) {
-            case EventRepository::TYPE_EVENT:
+        $now = new \DateTime();
+
+        $status = null;
+
+        if ($now > $event->getStartAt() && $now < $event->getEndAt()) {
+            $status = CalendarEvent::STATUS_IN_PROGRESS;
+        } elseif ($now > $event->getEndAt()) {
+            $status = CalendarEvent::STATUS_PAST;
+        } elseif ($now < $event->getStartAt()) {
+            $status = CalendarEvent::STATUS_INCOMING;
+        }
+
+        switch($status) {
+            case CalendarEvent::STATUS_IN_PROGRESS:
+                $class = 'event-success';
+                break;
+            case CalendarEvent::STATUS_INCOMING:
                 $class = 'event-info';
                 break;
-            case EventRepository::TYPE_VOTE:
-                $class = 'event-special';
+            case CalendarEvent::STATUS_PAST:
+                $class = 'event-important';
+                break;
+            default:
+                $class = 'event';
                 break;
         }
+        
         $calEvent = new CalendarEvent();
         $calEvent->setId($event->getId());
         $calEvent->setTitle($event->getTitle());

@@ -39,7 +39,9 @@ class EventRepository extends AbstractRepository
             ->where('e.startAt <= :from AND e.endAt >= :from AND e.endAt <= :to')
             ->orWhere('e.startAt >= :from AND e.startAt <= :to AND e.endAt >= :to')
             ->orWhere('e.startAt >= :from AND e.endAt <= :to')
+            ->andWhere('e.type = :type')
             ->setParameters(array(
+                'type'  => EventRepository::TYPE_EVENT,
                 'from'  => $from->format('Y-m-d'),
                 'to'    => $to->format('Y-m-d'),
             ))

@@ -18,7 +18,7 @@ function ucfirst(str) {
 
     var options = {
         //events_source: function () { return []; },
-        events_source: '/api/events',
+        events_source: '/api/calendars',
         view: 'month',
         tmpl_path: '/bower_components/bootstrap-calendar/tmpls/',
         tmpl_cache: false,

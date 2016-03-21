@@ -17,6 +17,10 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class CalendarEvent
 {
+    const STATUS_IN_PROGRESS = 'IN PROGRESS';
+    const STATUS_PAST        = 'PAST';
+    const STATUS_INCOMING    = 'INCOMING';
+
     /** @var integer $id */
     protected $id;
     /** @var string $title  */
