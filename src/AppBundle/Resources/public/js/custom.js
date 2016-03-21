@@ -17,8 +17,9 @@
             list.html('');
 
             $.each(events, function(key, val) {
+                var eventDate = moment(new Date(val.start).toJSON().slice(0, 10)).format('DD/MM/YYYY');
                 $(document.createElement('li'))
-                    .html('<a href="' + val.url + '">' + val.title + '</a>')
+                    .html('<a href="' + val.url + '">' + val.title + '<span class="label label-default pull-right">' + eventDate + '</span></a>')
                     .appendTo(list);
             });
         },
@@ -95,6 +96,5 @@
 
     $('#first_day').trigger('change');
     $('#language').trigger('change');
-    $('#events-in-modal').trigger('change');
 
 }(jQuery));

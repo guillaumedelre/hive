@@ -32,7 +32,8 @@
         "jms/serializer-bundle": "dev-master",
         "nelmio/api-doc-bundle": "^2.9",
         "willdurand/hateoas-bundle": "^1.1",
-        "cocur/slugify": "^2.0"
+        "cocur/slugify": "^2.0",
+        "stfalcon/tinymce-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

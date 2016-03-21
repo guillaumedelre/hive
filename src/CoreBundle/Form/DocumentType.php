@@ -20,7 +20,10 @@ class DocumentType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, array('label' => 'Titre'))
-            ->add('description', TextareaType::class, array('label' => 'Description'))
+            ->add('description', TextareaType::class, array(
+                'label' => 'Description',
+                'attr' => array('class' => "tinymce", 'rows'  => 10),
+            ))
             ->add('file', FileType::class)
             ->add('user', EntityType::class , array(
                 'label'      => 'Sélectionner un utilisateur',

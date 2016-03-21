@@ -22,7 +22,7 @@
         <div class="col-md-10">
             <h3 class="dashhead-title">{{ article.title|capitalize }}</h3>
             <blockquote>
-                <p>{{ article.description|nl2br }}</p>
+                <p>{{ article.description|raw }}</p>
                 <footer>
                     <span class="label label-primary">{{ article.category }}</span> <cite title="Auteur">{{ article.author.fullname|capitalize }}</cite>, le {{ article.updatedAt|date('d/m/Y') }}
                 </footer>

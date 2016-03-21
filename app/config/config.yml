@@ -103,3 +103,13 @@ fos_rest:
 
 # Nelmio Api Doc
 nelmio_api_doc: ~
+
+# Tinymce Configuration
+stfalcon_tinymce:
+        include_jquery: true
+        tinymce_jquery: true
+        selector: ".tinymce"
+        language: fr_FR
+        theme:
+            simple:
+                theme: "modern"

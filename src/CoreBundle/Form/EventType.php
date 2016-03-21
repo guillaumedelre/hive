@@ -36,7 +36,10 @@ class EventType extends AbstractType
                 'attr'       => array('class' => 'custom-select'),
             ))
             ->add('title', TextType::class, array('label' => 'Titre'))
-            ->add('description', TextareaType::class, array('label' => 'Description'))
+            ->add('description', TextareaType::class, array(
+                'label' => 'Description',
+                'attr' => array('class' => "tinymce", 'rows'  => 10),
+            ))
             ->add('startAt', DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',

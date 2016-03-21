@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <h3 class="dashhead-title">{{ event.title|capitalize }}</h3>
         <blockquote>
-            <p>{{ event.description|nl2br }}</p>
+            <p>{{ event.description|raw }}</p>
             <footer>
                 <cite title="Auteur">{{ event.user.fullname|capitalize }}</cite>, le {{ event.updatedAt|date('d/m/Y') }}
             </footer>

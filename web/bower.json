@@ -8,6 +8,7 @@
     "tablesorter": "latest",
     "bootstrap": "^3",
     "underscore": "latest",
-    "bootstrap-calendar": "latest"
+    "bootstrap-calendar": "latest",
+    "moment": "latest"
   }
 }
