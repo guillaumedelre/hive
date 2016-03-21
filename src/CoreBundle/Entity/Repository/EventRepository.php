@@ -32,8 +32,8 @@ class EventRepository extends AbstractRepository
             throw new \Exception('Missing parameter', Codes::HTTP_BAD_REQUEST);
         }
 
-        $from = (new \DateTime)->setTimestamp(substr($from, 0, 10));
-        $to   = (new \DateTime)->setTimestamp(substr($to, 0, 10));
+        $from = (new \DateTime)->setTimestamp($from/1000);
+        $to   = (new \DateTime)->setTimestamp($to/1000);
 
         return $this->createQueryBuilder('e')
             ->where('e.startAt <= :from AND e.endAt >= :from AND e.endAt <= :to')

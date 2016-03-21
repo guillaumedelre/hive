@@ -11,6 +11,7 @@ namespace ApiBundle\Entity\Factory;
 
 use ApiBundle\Entity\CalendarEvent;
 use CoreBundle\Entity\Event;
+use CoreBundle\Entity\Repository\EventRepository;
 use CoreBundle\Service\MeService;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
@@ -38,15 +39,23 @@ class CalendarEventFactory
      */
     public function createFromEvent(Event $event)
     {
+        switch($event->getType()) {
+            case EventRepository::TYPE_EVENT:
+                $class = 'event-info';
+                break;
+            case EventRepository::TYPE_VOTE:
+                $class = 'event-special';
+                break;
+        }
         $calEvent = new CalendarEvent();
         $calEvent->setId($event->getId());
         $calEvent->setTitle($event->getTitle());
         $calEvent->setSlug($event->getSlug());
         $calEvent->setDescription($event->getDescription());
-        $calEvent->setClass('');
+        $calEvent->setClass($class);
         $calEvent->setUrl($this->router->getGenerator()->generate('app_default_index', ['hiveSlug' => $this->me->getUser()->getHive()->getSlug()]));
-        $calEvent->setStart($event->getStartAt()->getTimestamp());
-        $calEvent->setEnd($event->getEndAt()->getTimestamp());
+        $calEvent->setStart($event->getStartAt()->getTimestamp() * 1000);
+        $calEvent->setEnd($event->getEndAt()->getTimestamp() * 1000);
 
         return $calEvent;
     }

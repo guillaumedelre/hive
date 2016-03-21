@@ -30,6 +30,22 @@
             <small>Les événements de la période en cours apparaîtront dans la liste ci-dessous.</small>
         </div>
 
+        <div class="modal fade" id="events-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3>Event</h3>
+                    </div>
+                    <div class="modal-body" style="height: 400px">
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-3">
                 <div class="row">
@@ -66,6 +82,9 @@
                     </label>
                     <label class="checkbox hide">
                         <input type="checkbox" id="show_wbn" checked> Show week box number
+                    </label>
+                    <label class="checkbox hide">
+                        <input type="checkbox" value="#events-modal" id="events-in-modal" checked> Open events in modal window
                     </label>
                 </div>
 

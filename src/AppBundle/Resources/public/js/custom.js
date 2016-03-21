@@ -6,7 +6,6 @@
         //events_source: function () { return []; },
         events_source: '/api/events',
         view: 'month',
-
         tmpl_path: '/bower_components/bootstrap-calendar/tmpls/',
         tmpl_cache: false,
         day: new Date().toJSON().slice(0,10),
@@ -82,10 +81,10 @@
         calendar.setOptions({weekbox: val});
         calendar.view();
     });
-    $('#events-modal .modal-header, #events-modal .modal-footer').click(function(e){
+//    $('#events-modal .modal-header, #events-modal .modal-footer').click(function(e){
         //e.preventDefault();
         //e.stopPropagation();
-    });
+//    });
 
     $('.delete-link').bind('click', function(e){
         e.preventDefault();
@@ -96,5 +95,6 @@
 
     $('#first_day').trigger('change');
     $('#language').trigger('change');
+    $('#events-in-modal').trigger('change');
 
 }(jQuery));
