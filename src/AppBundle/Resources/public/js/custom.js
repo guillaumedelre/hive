@@ -17,7 +17,8 @@
             list.html('');
 
             $.each(events, function(key, val) {
-                var eventDate = moment(new Date(val.start).toJSON().slice(0, 10)).format('DD/MM/YYYY');
+                //var eventDate = moment(new Date(val.start).toJSON().slice(0, 10)).format('DD/MM/YYYY');
+                var eventDate = moment(new Date(val.start).toJSON().slice(0, 10)).fromNow();
                 $(document.createElement('li'))
                     .html('<a href="' + val.url + '">' + val.title + '<span class="label label-default pull-right">' + eventDate + '</span></a>')
                     .appendTo(list);
