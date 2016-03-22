@@ -110,7 +110,7 @@ function ucfirst(str) {
 
     $.each($('.event-votes'), function(i, el) {
         $.getJSON($(el).attr('data-contribution-url'), null, function(contribution){
-            $(el).find('div.progress').html('<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="' + contribution + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + contribution + '%">&nbsp;' + contribution + '%</div>');
+            $(el).find('div.progress').html('<div class="progress-bar" role="progressbar" aria-valuenow="' + contribution + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + contribution + '%">&nbsp;' + contribution + '%</div>');
         });
     });
 

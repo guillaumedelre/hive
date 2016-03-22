@@ -54,7 +54,7 @@ class VoteController extends Controller
         /** @var Event $event */
         foreach($events as $event) {
             $graphData['division'] = $this->get('core.repository.event')->getDivision($event);
-            $graphs[$event->getId()] = $this->render('AppBundle:Vote:graph.html.twig', $graphData);
+            $graphs[$event->getId()] = $this->render('AppBundle:Vote:graph.html.twig', $graphData)->getContent();
         }
 
         $data = array(
