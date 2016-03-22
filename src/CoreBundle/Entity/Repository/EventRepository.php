@@ -180,7 +180,6 @@ class EventRepository extends AbstractRepository
      */
     public function getDivision(Event $event)
     {
-        $result = [];
         $approved = 0;
         $refused  = 0;
 
@@ -193,16 +192,17 @@ class EventRepository extends AbstractRepository
             }
         }
 
-        $result[] = array(
-            'value' => $approved,
-            'color' => '#1bc98e',
-            'label' => VoteRepository::LABEL_APPROVED,
-        );
-
-        $result[] = array(
-            'value' => $refused,
-            'color' => '#e64759',
-            'label' => VoteRepository::LABEL_REFUSED,
+        $result = array(
+            array(
+                'value' => $approved,
+                'color' => '#1bc98e',
+                'label' => VoteRepository::LABEL_APPROVED,
+            ),
+            array(
+                'value' => $refused,
+                'color' => '#e64759',
+                'label' => VoteRepository::LABEL_REFUSED,
+            ),
         );
 
         return json_encode($result);
