@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VoteType extends AbstractType
+class MyVoteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,15 +18,11 @@ class VoteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('event', EntityType::class , array(
-                'label'      => 'Sélectionner un événement',
-                'class'      => 'CoreBundle\Entity\Event',
-            ))
             ->add('approved', ChoiceType::class, array(
                 'label' => 'Sélectionner un choix',
                 'choices' => [
-                    VoteRepository::LABEL_APPROVED => VoteRepository::CHOICE_APPROVED,
-                    VoteRepository::LABEL_REFUSED => VoteRepository::CHOICE_REFUSED,
+                    'Approuvé' => VoteRepository::CHOICE_APPROVED,
+                    'Refusé' => VoteRepository::CHOICE_REFUSED,
                 ],
             ))
         ;

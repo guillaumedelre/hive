@@ -111,13 +111,18 @@ function ucfirst(str) {
     $.each($('.event-votes'), function(i, el) {
         $.getJSON($(el).attr('data-contribution-url'), null, function(contribution){
             $(el).find('div.progress').html('<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="' + contribution + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + contribution + '%">&nbsp;' + contribution + '%</div>');
-            var divEventVoteForm = $(el).find('div.event-vote-form');
-            var voteUrl = divEventVoteForm.attr('data-user-has-contributed-url');
-            $.getJSON(voteUrl, null, function(userHasContributed){
-                if (true === userHasContributed) {
-                    divEventVoteForm.hide();
-                }
-            });
+        });
+    });
+
+    $.each($('.event-graph'), function(i, el) {
+        $.get($(el).attr('data-graph-url'), null, function(graph){
+            $(el).html(graph);
+        });
+    });
+
+    $.each($('.event-vote-form'), function(i, el) {
+        $.get($(el).attr('data-user-contribute-form-url'), null, function(form){
+            $(el).html(form);
         });
     });
 

@@ -13,4 +13,7 @@ class VoteRepository extends AbstractRepository
 {
     const CHOICE_APPROVED  = true;
     const CHOICE_REFUSED   = false;
+
+    const LABEL_APPROVED  = 'Approuvé';
+    const LABEL_REFUSED   = 'Refusé';
 }

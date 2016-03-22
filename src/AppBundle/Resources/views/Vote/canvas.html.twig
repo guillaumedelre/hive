@@ -1,0 +1,16 @@
+<div class="event-votes" data-contribution-url="{{ url('app_vote_contribution', {'hiveSlug': me.hive.slug, 'eventId': event.id}) }}">
+    <div class="col-sm-3 m-b-md">
+        <div class="w-lg m-x-auto">
+            <h3>{{ event.title|capitalize }}</h3>
+            <p>{{ event.description|slice(0, 255) }}...</p>
+            <div class="event-graph" data-graph-url="{{ url('app_vote_graph', {'hiveSlug': me.hive.slug, 'eventId': event.id}) }}"></div>
+        </div>
+    </div>
+    <div class="col-sm-9 m-b-md">
+        <div class="w-lg m-x-auto">
+            <h3>Participation</h3>
+            <div class="progress"></div>
+            <div class="event-vote-form" data-user-contribute-form-url="{{ url('app_vote_user_contribute_form', {'hiveSlug': me.hive.slug, 'eventId': event.id}) }}"></div>
+        </div>
+    </div>
+</div>

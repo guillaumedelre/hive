@@ -14,6 +14,7 @@ parameters:
     core.form.type.me.class: CoreBundle\Form\MeType
     core.form.type.user.class: CoreBundle\Form\UserType
     core.form.type.vote.class: CoreBundle\Form\VoteType
+    core.form.type.myvote.class: CoreBundle\Form\MyVoteType
 
     # form handlers
     core.form.handler.abstract.class: CoreBundle\Form\Handler\AbstractFormHandler
@@ -25,6 +26,7 @@ parameters:
     core.form.handler.me.class: CoreBundle\Form\Handler\MeHandler
     core.form.handler.user.class: CoreBundle\Form\Handler\UserHandler
     core.form.handler.vote.class: CoreBundle\Form\Handler\VoteHandler
+    core.form.handler.myvote.class: CoreBundle\Form\Handler\MyVoteHandler
 
     # entity classes
     core.entity.article.class: CoreBundle:Article
@@ -132,6 +134,11 @@ services:
         parent: core.form.handler.abstract
         calls:
             - [ setFormType, [%core.form.type.vote.class%] ]
+    core.form.handler.myvote:
+        class: %core.form.handler.myvote.class%
+        parent: core.form.handler.abstract
+        calls:
+            - [ setFormType, [%core.form.type.myvote.class%] ]
 
     # me service
     core.service.me:

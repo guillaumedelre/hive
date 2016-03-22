@@ -12,6 +12,6 @@ namespace CoreBundle\Form\Handler;
 use CoreBundle\Entity\Vote;
 use Symfony\Component\HttpFoundation\Request;
 
-class VoteHandler extends AbstractFormHandler
+class MyVoteHandler extends AbstractFormHandler
 {
 }

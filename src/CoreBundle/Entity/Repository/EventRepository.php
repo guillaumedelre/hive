@@ -12,6 +12,7 @@ namespace CoreBundle\Entity\Repository;
 use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\Event;
 use CoreBundle\Entity\User;
+use CoreBundle\Entity\Vote;
 use FOS\RestBundle\Util\Codes;
 
 class EventRepository extends AbstractRepository
@@ -97,7 +98,7 @@ class EventRepository extends AbstractRepository
     public function getCurrentContributionByEvent(Event $event, User $me)
     {
         try {
-            $result = ceil(count($me->getHive()->getUsers()) * 100 / count($event->getVotes()));
+            $result = round(count($me->getHive()->getUsers()) * 100 / count($event->getVotes()));
         } catch (\Exception $e) {
             $result = 0;
         }
@@ -112,11 +113,14 @@ class EventRepository extends AbstractRepository
      */
     public function userHasContributed(Event $event, User $me)
     {
-        foreach($event->getVotes() as $vote) {
-            foreach($me->getVotes() as $myVote) {
-                if ($myVote === $vote) {
-                    return true;
-                }
+        if ($this->isFinished($event)) {
+            return true;
+        }
+
+        /** @var Vote $myVote */
+        foreach($me->getVotes() as $myVote) {
+            if ($myVote->getEvent()->getId() === $event->getId()) {
+                return true;
             }
         }
 
@@ -159,5 +163,48 @@ class EventRepository extends AbstractRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @param Event $event
+     * @return bool
+     */
+    public function isFinished(Event $event)
+    {
+        return $event->getEndAt() < new \DateTime();
+    }
+
+    /**
+     * @param Event $event
+     * @return string
+     */
+    public function getDivision(Event $event)
+    {
+        $result = [];
+        $approved = 0;
+        $refused  = 0;
+
+        /** @var Vote $vote */
+        foreach($event->getVotes() as $vote) {
+            if ($vote->getApproved()) {
+                $approved++;
+            } else {
+                $refused++;
+            }
+        }
+
+        $result[] = array(
+            'value' => $approved,
+            'color' => '#1bc98e',
+            'label' => VoteRepository::LABEL_APPROVED,
+        );
+
+        $result[] = array(
+            'value' => $refused,
+            'color' => '#e64759',
+            'label' => VoteRepository::LABEL_REFUSED,
+        );
+
+        return json_encode($result);
     }
 }

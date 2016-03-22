@@ -60,13 +60,15 @@ abstract class AbstractFormHandler
 
     /**
      * @param $entity
+     * @param $actionUrl
      * @return Form
      */
-    public function buildForm($entity)
+    public function buildForm($entity, $actionUrl = '')
     {
         $this->form = $this->formFactory
             ->createBuilder($this->formType, $entity)
-            ->add('save', SubmitType::class, array('label_format' => 'Save', 'attr' => ['class' => "btn btn-default"]))
+            ->setAction($actionUrl)
+            ->add('save', SubmitType::class, array('label_format' => 'Enregistrer', 'attr' => ['class' => "btn btn-default"]))
             ->getForm();
 
         return $this->form;

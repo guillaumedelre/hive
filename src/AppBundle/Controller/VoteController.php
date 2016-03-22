@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\User;
+use CoreBundle\Entity\Vote;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -50,7 +51,7 @@ class VoteController extends Controller
         $data = array(
             'currentPage'   => $page,
             'currentLimit'  => $limit,
-            'pageTitle'     => 'Articles',
+            'pageTitle'     => 'Sondages',
             'totalPages'    => $totalPages,
             'me'            => $this->get('core.service.me')->getUser(),
             'events'        => $events,
@@ -86,11 +87,11 @@ class VoteController extends Controller
     }
 
     /**
-     * @Route("/{hiveSlug}/sondages/{eventId}/a-participe", name="app_vote_user_has_contributed")
+     * @Route("/{hiveSlug}/sondages/{eventId}/formulaire", name="app_vote_user_contribute_form")
      */
-    public function getUserHasContributedAction(Request $request, $hiveSlug, $eventId)
+    public function getUserContributeForm(Request $request, $hiveSlug, $eventId)
     {
-        $hasVoted = false;
+        $data = [];
 
         /** @var User $me */
         $me = $this->get('core.service.me')->getUser();
@@ -101,12 +102,64 @@ class VoteController extends Controller
 
         $event = $this->get('core.repository.event')->find($eventId);
 
-        if (null === $event) {
-            $this->get('session')->getFlashBag()->add('danger', "Une erreur s'est produite pendant la récupération de la participation.");
-        } else {
-            $hasVoted = $this->get('core.repository.event')->userHasContributed($event, $me);
+        if (!$this->get('core.repository.event')->userHasContributed($event, $me)) {
+            $entity = new Vote();
+            $entity->setUser($me);
+            $entity->setEvent($event);
+
+            $this->get('core.form.handler.myvote')->buildForm($entity, $this->generateUrl('app_vote_user_contribute', ['hiveSlug' => $hiveSlug, 'eventId' => $eventId]));
+
+            $data = ["form" => $this->get('core.form.handler.myvote')->getForm()->createView()];
         }
 
-        return new JsonResponse($hasVoted);
+        return $this->render('AppBundle:Vote:contribute.html.twig', $data);
+    }
+
+    /**
+     * @Route("/{hiveSlug}/sondages/{eventId}/a-voter", name="app_vote_user_contribute")
+     */
+    public function contributeAction(Request $request, $hiveSlug, $eventId)
+    {
+        /** @var User $me */
+        $me = $this->get('core.service.me')->getUser();
+
+        if ($hiveSlug !== $me->getHive()->getSlug()) {
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
+        }
+
+        $event = $this->get('core.repository.event')->find($eventId);
+
+        if ('POST' === $request->getMethod()) {
+            $entity = new Vote();
+            $entity->setUser($me);
+            $entity->setEvent($event);
+
+            $this->get('core.form.handler.myvote')->buildForm($entity);
+
+            $this->get('core.form.handler.myvote')->process($request, $entity);
+        }
+
+        return $this->redirectToRoute('app_vote_by_status', ['hiveSlug' => $hiveSlug, 'status' => $this->get('cocur_slugify')->slugify('en cours')]);
+    }
+
+    /**
+     * @Route("/{hiveSlug}/sondages/{eventId}/graph", name="app_vote_graph")
+     */
+    public function getGraphAction(Request $request, $hiveSlug, $eventId)
+    {
+        $data = [];
+
+        /** @var User $me */
+        $me = $this->get('core.service.me')->getUser();
+
+        if ($hiveSlug !== $me->getHive()->getSlug()) {
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
+        }
+
+        $event = $this->get('core.repository.event')->find($eventId);
+
+        $data['division'] = $this->get('core.repository.event')->getDivision($event);
+
+        return $this->render('AppBundle:Vote:graph.html.twig', $data);
     }
 }
