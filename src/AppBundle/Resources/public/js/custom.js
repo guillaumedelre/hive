@@ -97,8 +97,8 @@ function ucfirst(str) {
         calendar.view();
     });
 //    $('#events-modal .modal-header, #events-modal .modal-footer').click(function(e){
-        //e.preventDefault();
-        //e.stopPropagation();
+    //e.preventDefault();
+    //e.stopPropagation();
 //    });
 
     $('.delete-link').bind('click', function(e){
@@ -106,6 +106,19 @@ function ucfirst(str) {
         if (confirm("Are you sure you want to delete ?")) {
             window.location.href = $(this).attr('href');
         }
+    });
+
+    $.each($('.event-votes'), function(i, el) {
+        $.getJSON($(el).attr('data-contribution-url'), null, function(contribution){
+            $(el).find('div.progress').html('<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="' + contribution + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + contribution + '%">&nbsp;' + contribution + '%</div>');
+            var divEventVoteForm = $(el).find('div.event-vote-form');
+            var voteUrl = divEventVoteForm.attr('data-user-has-contributed-url');
+            $.getJSON(voteUrl, null, function(userHasContributed){
+                if (true === userHasContributed) {
+                    divEventVoteForm.hide();
+                }
+            });
+        });
     });
 
     $('#first_day').trigger('change');

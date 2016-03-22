@@ -6,6 +6,7 @@ use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class VoteController extends Controller
@@ -57,5 +58,55 @@ class VoteController extends Controller
         );
 
         return $this->render('AppBundle:Vote:status.html.twig', $data);
+    }
+
+    /**
+     * @Route("/{hiveSlug}/sondages/{eventId}/participation", name="app_vote_contribution")
+     */
+    public function getContributionByEventAction(Request $request, $hiveSlug, $eventId)
+    {
+        $contributon = null;
+
+        /** @var User $me */
+        $me = $this->get('core.service.me')->getUser();
+
+        if ($hiveSlug !== $me->getHive()->getSlug()) {
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
+        }
+
+        $event = $this->get('core.repository.event')->find($eventId);
+
+        if (null === $event) {
+            $this->get('session')->getFlashBag()->add('danger', "Une erreur s'est produite pendant la récupération de la participation.");
+        } else {
+            $contributon = $this->get('core.repository.event')->getCurrentContributionByEvent($event, $me);
+        }
+
+        return new JsonResponse($contributon);
+    }
+
+    /**
+     * @Route("/{hiveSlug}/sondages/{eventId}/a-participe", name="app_vote_user_has_contributed")
+     */
+    public function getUserHasContributedAction(Request $request, $hiveSlug, $eventId)
+    {
+        $hasVoted = false;
+
+        /** @var User $me */
+        $me = $this->get('core.service.me')->getUser();
+
+        if ($hiveSlug !== $me->getHive()->getSlug()) {
+            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
+        }
+
+        $event = $this->get('core.repository.event')->find($eventId);
+
+        if (null === $event) {
+            $this->get('session')->getFlashBag()->add('danger', "Une erreur s'est produite pendant la récupération de la participation.");
+        } else {
+            $hasVoted = $this->get('core.repository.event')->userHasContributed($event, $me);
+        }
+
+        return new JsonResponse($hasVoted);
     }
 }

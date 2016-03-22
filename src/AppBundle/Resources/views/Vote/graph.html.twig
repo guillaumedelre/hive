@@ -1,13 +1,26 @@
-<div class="col-sm-3 m-b-md">
-    <div class="w-lg m-x-auto">
-        <h3>{{ event.title|capitalize }}</h3>
-        <p>{{ event.description|slice(0, 255) }}...</p>
-        <canvas
-                class="ex-graph"
-                width="200" height="200"
-                data-chart="doughnut"
-                data-value="[{ value: 230, color: '#e64759', label: 'Non' }, { value: 130, color: '#1bc98e', label: 'Oui' }]"
-                data-segment-stroke-color="#252830">
-        </canvas>
+<div class="event-votes" data-contribution-url="{{ url('app_vote_contribution', {'hiveSlug': me.hive.slug, 'eventId': event.id}) }}">
+    <div class="col-sm-3 m-b-md">
+        <div class="w-lg m-x-auto">
+            <h3>{{ event.title|capitalize }}</h3>
+            <p>{{ event.description|slice(0, 255) }}...</p>
+            <canvas
+                    class="ex-graph"
+                    width="200" height="200"
+                    data-chart="doughnut"
+                    data-value="[{ value: 230, color: '#e64759', label: 'Non' }, { value: 130, color: '#1bc98e', label: 'Oui' }]"
+                    data-segment-stroke-color="#252830">
+            </canvas>
+        </div>
+    </div>
+    <div class="col-sm-9 m-b-md">
+        <div class="w-lg m-x-auto">
+            <h3>Participation</h3>
+            <div class="progress"></div>
+            <div class="event-vote-form" data-user-has-contributed-url="{{ url('app_vote_user_has_contributed', {'hiveSlug': me.hive.slug, 'eventId': event.id}) }}">
+                {% if form is defined %}
+                    {% include "AppBundle:Vote:contribute.html.twig" %}
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>

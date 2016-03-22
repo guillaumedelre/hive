@@ -11,6 +11,7 @@ namespace CoreBundle\Entity\Repository;
 
 use CoreBundle\Entity\AbstractEntity;
 use CoreBundle\Entity\Event;
+use CoreBundle\Entity\User;
 use FOS\RestBundle\Util\Codes;
 
 class EventRepository extends AbstractRepository
@@ -86,6 +87,40 @@ class EventRepository extends AbstractRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @param Event $event
+     * @param User $me
+     * @return float
+     */
+    public function getCurrentContributionByEvent(Event $event, User $me)
+    {
+        try {
+            $result = ceil(count($me->getHive()->getUsers()) * 100 / count($event->getVotes()));
+        } catch (\Exception $e) {
+            $result = 0;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param Event $event
+     * @param User $me
+     * @return bool
+     */
+    public function userHasContributed(Event $event, User $me)
+    {
+        foreach($event->getVotes() as $vote) {
+            foreach($me->getVotes() as $myVote) {
+                if ($myVote === $vote) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
