@@ -2,4 +2,38 @@
 
 {% block content %}
     {{ parent() }}
+
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="active">Tableau de bord</li>
+        </ol>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                {{ include('AppBundle:Default:timeline.html.twig') }}
+            </div>
+            <div class="col-md-3">
+                <div class="page-header">
+                    <h2>En ce moment</h2>
+                </div>
+                {% if current is defined %}
+                    {% for event in current %}
+                        {{ include('AppBundle:Default:event.html.twig') }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <div class="page-header">
+                    <h2>Bientôt</h2>
+                </div>
+                {% if incoming is defined %}
+                    {% for event in incoming %}
+                        {{ include('AppBundle:Default:event.html.twig') }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

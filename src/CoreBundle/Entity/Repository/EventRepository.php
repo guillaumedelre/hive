@@ -203,4 +203,47 @@ class EventRepository extends AbstractRepository
 
         return json_encode($result);
     }
+
+    /**
+     * @param User $me
+     * @return Event[]
+     */
+    public function getCurrentEvents(User $me)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.user IN (:in)')
+            ->andWhere('e.type = :type')
+            ->andWhere('e.startAt <= :now')
+            ->andWhere('e.endAt >= :now')
+            ->setParameters(array(
+                'type' => self::TYPE_EVENT,
+                'in' => $me->getHive()->getUsers(),
+                'now' => new \DateTime(),
+            ))
+            ->setMaxResults(AbstractEntity::DEFAULT_LIMIT_APP)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @param User $me
+     * @return Event[]
+     */
+    public function getIncomingEvents(User $me)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.user IN (:in)')
+            ->andWhere('e.type = :type')
+            ->andWhere('e.startAt > :now')
+            ->setParameters(array(
+                'type' => self::TYPE_EVENT,
+                'in' => $me->getHive()->getUsers(),
+                'now' => new \DateTime(),
+            ))
+            ->setMaxResults(AbstractEntity::DEFAULT_LIMIT_APP)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
