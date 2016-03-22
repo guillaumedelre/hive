@@ -1,6 +1,16 @@
 {% if form is defined %}
-    {% form_theme form 'bootstrap_3_layout.html.twig' %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    {{ form_end(form) }}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Mon avis sur le sondage</h4>
+        </div>
+        <div class="panel-body">
+            <p>
+                {{ event.description|raw }}
+            </p>
+            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endif %}

@@ -2,7 +2,6 @@
     <div class="col-sm-3 m-b-md">
         <div class="w-lg m-x-auto">
             <h3>{{ event.title|capitalize }}</h3>
-            <p>{{ event.description|slice(0, 255) }}...</p>
             <div class="event-graph">
                 {{ graphs[event.id]|raw }}
             </div>
@@ -10,9 +9,27 @@
     </div>
     <div class="col-sm-9 m-b-md">
         <div class="w-lg m-x-auto">
-            <h3>Participation</h3>
-            <div class="progress"></div>
             <div class="event-vote-form" data-user-contribute-form-url="{{ url('app_vote_user_contribute_form', {'hiveSlug': me.hive.slug, 'eventId': event.id}) }}"></div>
+            <h4>Participation</h4>
+            <div class="progress"></div>
+            <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th class="text-center">Date du vote</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for vote in event.votes %}
+                        <tr>
+                            <td>{{ vote.user.fullname }}</td>
+                            <td class="text-center">{{ vote.updatedAt|date('d/m/Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

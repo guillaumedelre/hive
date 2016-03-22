@@ -16,7 +16,7 @@ class VoteController extends Controller
     /**
      * @Route("/{hiveSlug}/sondages", name="app_vote_index")
      */
-    public function indexAction(Request $request, $hiveSlug)
+    public function indexAction($hiveSlug)
     {
         return $this->redirectToRoute('app_vote_by_status', ['hiveSlug' => $hiveSlug, 'status' => $this->get('cocur_slugify')->slugify('en cours')]);
     }
@@ -99,7 +99,7 @@ class VoteController extends Controller
     /**
      * @Route("/{hiveSlug}/sondages/{eventId}/formulaire", name="app_vote_user_contribute_form")
      */
-    public function getUserContributeForm(Request $request, $hiveSlug, $eventId)
+    public function getUserContributeForm($hiveSlug, $eventId)
     {
         $data = [];
 
@@ -112,15 +112,19 @@ class VoteController extends Controller
 
         $event = $this->get('core.repository.event')->find($eventId);
 
-        if (!$this->get('core.repository.event')->userHasContributed($event, $me)) {
-            $entity = new Vote();
+        $entity = $this->get('core.repository.event')->getUserContribution($event, $me);
+
+        if (null !== $entity) {
+
             $entity->setUser($me);
             $entity->setEvent($event);
 
             $this->get('core.form.handler.myvote')->buildForm($entity, $this->generateUrl('app_vote_user_contribute', ['hiveSlug' => $hiveSlug, 'eventId' => $eventId]));
 
-            $data = ["form" => $this->get('core.form.handler.myvote')->getForm()->createView()];
+            $data["form"] = $this->get('core.form.handler.myvote')->getForm()->createView();
         }
+
+        $data["event"] = $event;
 
         return $this->render('AppBundle:Vote:contribute.html.twig', $data);
     }
@@ -140,7 +144,8 @@ class VoteController extends Controller
         $event = $this->get('core.repository.event')->find($eventId);
 
         if ('POST' === $request->getMethod()) {
-            $entity = new Vote();
+            $entity = $this->get('core.repository.event')->getUserContribution($event, $me);
+            $entity = (null === $entity) ? new Vote() : $entity;
             $entity->setUser($me);
             $entity->setEvent($event);
 

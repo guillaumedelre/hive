@@ -109,22 +109,18 @@ class EventRepository extends AbstractRepository
     /**
      * @param Event $event
      * @param User $me
-     * @return bool
+     * @return Vote|null
      */
-    public function userHasContributed(Event $event, User $me)
+    public function getUserContribution(Event $event, User $me)
     {
-        if ($this->isFinished($event)) {
-            return true;
-        }
-
         /** @var Vote $myVote */
         foreach($me->getVotes() as $myVote) {
             if ($myVote->getEvent()->getId() === $event->getId()) {
-                return true;
+                return $myVote;
             }
         }
 
-        return false;
+        return null;
     }
 
     /**
