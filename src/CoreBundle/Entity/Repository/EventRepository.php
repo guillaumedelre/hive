@@ -21,6 +21,7 @@ class EventRepository extends AbstractRepository
     const TYPE_EVENT = 'event';
 
     /**
+     * @param User $me
      * @param null $from
      * @param null $to
      * @param $limit
@@ -28,7 +29,7 @@ class EventRepository extends AbstractRepository
      * @return array
      * @throws \Exception
      */
-    public function getEventsBetween($from = null, $to = null, $limit, $offset)
+    public function getEventsBetween(User $me, $from = null, $to = null, $limit, $offset)
     {
         if (null === $from || null === $to) {
             throw new \Exception('Missing parameter', Codes::HTTP_BAD_REQUEST);
@@ -38,11 +39,13 @@ class EventRepository extends AbstractRepository
         $to   = (new \DateTime)->setTimestamp($to/1000);
 
         return $this->createQueryBuilder('e')
-            ->where('e.startAt <= :from AND e.endAt >= :from AND e.endAt <= :to')
+            ->where('e.user IN (:in)')
+            ->andWhere('e.type = :type')
+            ->andWhere('e.startAt <= :from AND e.endAt >= :from AND e.endAt <= :to')
             ->orWhere('e.startAt >= :from AND e.startAt <= :to AND e.endAt >= :to')
             ->orWhere('e.startAt >= :from AND e.endAt <= :to')
-            ->andWhere('e.type = :type')
             ->setParameters(array(
+                'in'    => $me->getHive()->getUsers(),
                 'type'  => EventRepository::TYPE_EVENT,
                 'from'  => $from->format('Y-m-d'),
                 'to'    => $to->format('Y-m-d'),
@@ -55,15 +58,19 @@ class EventRepository extends AbstractRepository
     }
 
     /**
+     * @param User $me
+     * @param $offset
      * @return Event[]
      */
-    public function getFinishedVoteEvents($offset)
+    public function getFinishedVoteEvents(User $me, $offset)
     {
         return $this->createQueryBuilder('e')
-            ->where('e.type = :type')
+            ->where('e.user IN (:in)')
+            ->andWhere('e.type = :type')
             ->andWhere('e.endAt < :endAt')
             ->setParameters(array(
-                'type' => self::TYPE_VOTE,
+                'in'    => $me->getHive()->getUsers(),
+                'type'  => self::TYPE_VOTE,
                 'endAt' => new \DateTime(),
             ))
             ->setMaxResults(AbstractEntity::DEFAULT_LIMIT_APP)
@@ -74,16 +81,19 @@ class EventRepository extends AbstractRepository
     }
 
     /**
+     * @param User $me
      * @return Event[]
      */
-    public function getAllFinishedVoteEvents()
+    public function getAllFinishedVoteEvents(User $me)
     {
         return $this->createQueryBuilder('e')
-            ->where('e.type = :type')
+            ->where('e.user IN (:in)')
+            ->andWhere('e.type = :type')
             ->andWhere('e.endAt < :endAt')
             ->setParameters(array(
+                'in'   => $me->getHive()->getUsers(),
                 'type' => self::TYPE_VOTE,
-                'endAt' => new \DateTime(),
+                'endAt'=> new \DateTime(),
             ))
             ->getQuery()
             ->getResult()
@@ -124,17 +134,21 @@ class EventRepository extends AbstractRepository
     }
 
     /**
+     * @param User $me
+     * @param $offset
      * @return Event[]
      */
-    public function getCurrentVoteEvents($offset)
+    public function getCurrentVoteEvents(User $me, $offset)
     {
         return $this->createQueryBuilder('e')
-            ->where('e.type = :type')
+            ->where('e.user IN (:in)')
+            ->andWhere('e.type = :type')
             ->andWhere('e.startAt <= :now')
             ->andWhere('e.endAt >= :now')
             ->setParameters(array(
+                'in'   => $me->getHive()->getUsers(),
                 'type' => self::TYPE_VOTE,
-                'now' => new \DateTime(),
+                'now'  => new \DateTime(),
             ))
             ->setMaxResults(AbstractEntity::DEFAULT_LIMIT_APP)
             ->setFirstResult($offset)
@@ -144,17 +158,20 @@ class EventRepository extends AbstractRepository
     }
 
     /**
+     * @param User $me
      * @return Event[]
      */
-    public function getAllCurrentVoteEvents()
+    public function getAllCurrentVoteEvents(User $me)
     {
         return $this->createQueryBuilder('e')
-            ->where('e.type = :type')
+            ->where('e.user IN (:in)')
+            ->andWhere('e.type = :type')
             ->andWhere('e.startAt <= :now')
             ->andWhere('e.endAt >= :now')
             ->setParameters(array(
+                'in'   => $me->getHive()->getUsers(),
                 'type' => self::TYPE_VOTE,
-                'now' => new \DateTime(),
+                'now'  => new \DateTime(),
             ))
             ->getQuery()
             ->getResult()
@@ -216,9 +233,9 @@ class EventRepository extends AbstractRepository
             ->andWhere('e.startAt <= :now')
             ->andWhere('e.endAt >= :now')
             ->setParameters(array(
+                'in'   => $me->getHive()->getUsers(),
                 'type' => self::TYPE_EVENT,
-                'in' => $me->getHive()->getUsers(),
-                'now' => new \DateTime(),
+                'now'  => new \DateTime(),
             ))
             ->setMaxResults(AbstractEntity::DEFAULT_LIMIT_APP)
             ->getQuery()

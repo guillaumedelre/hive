@@ -38,8 +38,9 @@ class CalendarController extends FOSRestController implements ClassResourceInter
         $page    = $paramFetcher->get('page', 0);
         $from    = $paramFetcher->get('from', null);
         $to      = $paramFetcher->get('to', null);
+        $me      = $this->get('core.service.me')->getUser();
 
-        $collection = $this->get('core.repository.event')->getEventsBetween($from, $to, $limit, $page * $limit);
+        $collection = $this->get('core.repository.event')->getEventsBetween($me, $from, $to, $limit, $page * $limit);
         $events = $this->get('core.factory.calendarevent')->createFromEvents($collection);
 
         if(!is_array($events)) {

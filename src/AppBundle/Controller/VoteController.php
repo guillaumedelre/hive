@@ -40,12 +40,12 @@ class VoteController extends Controller
 
         switch($status) {
             case $this->get('cocur_slugify')->slugify('en cours'):
-                $events     = $this->get('core.repository.event')->getCurrentVoteEvents($page * $limit);
-                $totalPages = ceil(count($this->get('core.repository.event')->getAllCurrentVoteEvents()) / AbstractEntity::DEFAULT_LIMIT_APP);
+                $events     = $this->get('core.repository.event')->getCurrentVoteEvents($me, $page * $limit);
+                $totalPages = ceil(count($this->get('core.repository.event')->getAllCurrentVoteEvents($me)) / AbstractEntity::DEFAULT_LIMIT_APP);
                 break;
             case $this->get('cocur_slugify')->slugify('terminé'):
-                $events = $this->get('core.repository.event')->getFinishedVoteEvents($page * $limit);
-                $totalPages = ceil(count($this->get('core.repository.event')->getAllFinishedVoteEvents()) / AbstractEntity::DEFAULT_LIMIT_APP);
+                $events = $this->get('core.repository.event')->getFinishedVoteEvents($me, $page * $limit);
+                $totalPages = ceil(count($this->get('core.repository.event')->getAllFinishedVoteEvents($me)) / AbstractEntity::DEFAULT_LIMIT_APP);
                 break;
         }
 
