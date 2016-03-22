@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use CoreBundle\Entity\AbstractEntity;
+use CoreBundle\Entity\Event;
 use CoreBundle\Entity\User;
 use CoreBundle\Entity\Vote;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -50,8 +51,10 @@ class VoteController extends Controller
 
         $graphs = [];
 
+        /** @var Event $event */
         foreach($events as $event) {
-            $graphs[$event->getId()] = $this->getGraphAction($request, $hiveSlug, $event->getId())->getContent();
+            $graphData['division'] = $this->get('core.repository.event')->getDivision($event);
+            $graphs[$event->getId()] = $this->render('AppBundle:Vote:graph.html.twig', $graphData);
         }
 
         $data = array(
@@ -147,26 +150,5 @@ class VoteController extends Controller
         }
 
         return $this->redirectToRoute('app_vote_by_status', ['hiveSlug' => $hiveSlug, 'status' => $this->get('cocur_slugify')->slugify('en cours')]);
-    }
-
-    /**
-     * @Route("/{hiveSlug}/sondages/{eventId}/graph", name="app_vote_graph")
-     */
-    public function getGraphAction(Request $request, $hiveSlug, $eventId)
-    {
-        $data = [];
-
-        /** @var User $me */
-        $me = $this->get('core.service.me')->getUser();
-
-        if ($hiveSlug !== $me->getHive()->getSlug()) {
-            $this->get('session')->getFlashBag()->add('danger', "L'url demandée est inconnue.");
-        }
-
-        $event = $this->get('core.repository.event')->find($eventId);
-
-        $data['division'] = $this->get('core.repository.event')->getDivision($event);
-
-        return $this->render('AppBundle:Vote:graph.html.twig', $data);
     }
 }
