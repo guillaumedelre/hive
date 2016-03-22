@@ -25,11 +25,11 @@
 
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" >
-                <div class="row m-t-md">
-                    {% for event in events %}
+                {% for event in events %}
+                    <div class="row m-t-md">
                         {{ include("AppBundle:Vote:canvas.html.twig") }}
-                    {% endfor %}
-                </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
