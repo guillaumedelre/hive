@@ -1,4 +1,4 @@
 services:
-    api.factory.calendarevent:
-        class: ApiBundle\Entity\Factory\CalendarEventFactory
-        arguments: [ "@router", "@core.service.me" ]
+#    api.example:
+#        class: ApiBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

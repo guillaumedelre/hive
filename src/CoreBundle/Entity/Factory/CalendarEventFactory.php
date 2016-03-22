@@ -6,12 +6,11 @@
  * Time: 10:07
  */
 
-namespace ApiBundle\Entity\Factory;
+namespace CoreBundle\Entity\Factory;
 
 
-use ApiBundle\Entity\CalendarEvent;
+use CoreBundle\Entity\CalendarEvent;
 use CoreBundle\Entity\Event;
-use CoreBundle\Entity\Repository\EventRepository;
 use CoreBundle\Service\MeService;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 

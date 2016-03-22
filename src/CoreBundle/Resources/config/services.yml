@@ -2,6 +2,9 @@ parameters:
     # me classe
     core.service.me.class: CoreBundle\Service\MeService
 
+    # calendat event factory
+    core.factory.calendarevent.class: CoreBundle\Entity\Factory\CalendarEventFactory
+
     # form types
     core.form.type.article.class: CoreBundle\Form\ArticleType
     core.form.type.category.class: CoreBundle\Form\CategoryType
@@ -134,3 +137,7 @@ services:
     core.service.me:
         class: %core.service.me.class%
         arguments: ["@core.repository.user", "@security.token_storage", "@router"]
+
+    core.factory.calendarevent:
+        class: %core.factory.calendarevent.class%
+        arguments: [ "@router", "@core.service.me" ]

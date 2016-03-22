@@ -20,7 +20,7 @@ class CalendarController extends FOSRestController implements ClassResourceInter
      *  resource=true,
      *  description="Récupère une collection paginée",
      *  section="Calendar",
-     *  output="ApiBundle\Entity\CalendarEvent",
+     *  output="CoreBundle\Entity\CalendarEvent",
      *  statusCodes={
      *      200="Ok",
      *      400="Bad Request",
@@ -40,7 +40,7 @@ class CalendarController extends FOSRestController implements ClassResourceInter
         $to      = $paramFetcher->get('to', null);
 
         $collection = $this->get('core.repository.event')->getEventsBetween($from, $to, $limit, $page * $limit);
-        $events = $this->get('api.factory.calendarevent')->createFromEvents($collection);
+        $events = $this->get('core.factory.calendarevent')->createFromEvents($collection);
 
         if(!is_array($events)) {
             throw $this->createNotFoundException();

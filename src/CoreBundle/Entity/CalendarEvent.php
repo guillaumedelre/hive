@@ -6,7 +6,7 @@
  * Time: 10:04
  */
 
-namespace ApiBundle\Entity;
+namespace CoreBundle\Entity;
 
 use JMS\Serializer\Annotation as Serializer;
 
