@@ -43,7 +43,9 @@ class CalendarEventFactory
 
         $status = null;
 
-        if ($now > $event->getStartAt() && $now < $event->getEndAt()) {
+        $event->setEndAt($event->getEndAt()->modify('+' . (3600 * 24 - 1) . ' seconds'));
+
+        if ($now >= $event->getStartAt() && $now <= $event->getEndAt()) {
             $status = CalendarEvent::STATUS_IN_PROGRESS;
         } elseif ($now > $event->getEndAt()) {
             $status = CalendarEvent::STATUS_PAST;
@@ -65,7 +67,7 @@ class CalendarEventFactory
                 $class = 'event';
                 break;
         }
-        
+
         $calEvent = new CalendarEvent();
         $calEvent->setId($event->getId());
         $calEvent->setTitle($event->getTitle());
