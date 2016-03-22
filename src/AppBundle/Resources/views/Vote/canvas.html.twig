@@ -3,7 +3,9 @@
         <div class="w-lg m-x-auto">
             <h3>{{ event.title|capitalize }}</h3>
             <p>{{ event.description|slice(0, 255) }}...</p>
-            <div class="event-graph" data-graph-url="{{ url('app_vote_graph', {'hiveSlug': me.hive.slug, 'eventId': event.id}) }}"></div>
+            <div class="event-graph">
+                {{ graphs[event.id]|raw }}
+            </div>
         </div>
     </div>
     <div class="col-sm-9 m-b-md">

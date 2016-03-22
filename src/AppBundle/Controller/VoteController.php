@@ -48,6 +48,12 @@ class VoteController extends Controller
                 break;
         }
 
+        $graphs = [];
+
+        foreach($events as $event) {
+            $graphs[$event->getId()] = $this->getGraphAction($request, $hiveSlug, $event->getId())->getContent();
+        }
+
         $data = array(
             'currentPage'   => $page,
             'currentLimit'  => $limit,
@@ -55,6 +61,7 @@ class VoteController extends Controller
             'totalPages'    => $totalPages,
             'me'            => $this->get('core.service.me')->getUser(),
             'events'        => $events,
+            'graphs'        => $graphs,
             'currentStatus' => $status,
         );
 

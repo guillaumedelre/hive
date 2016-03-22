@@ -114,12 +114,6 @@ function ucfirst(str) {
         });
     });
 
-    $.each($('.event-graph'), function(i, el) {
-        $.get($(el).attr('data-graph-url'), null, function(graph){
-            $(el).html(graph);
-        });
-    });
-
     $.each($('.event-vote-form'), function(i, el) {
         $.get($(el).attr('data-user-contribute-form-url'), null, function(form){
             $(el).html(form);
